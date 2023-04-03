@@ -1,0 +1,468 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;600&display=swap');
+
+*{
+    font-family: 'Quicksand', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    text-decoration: none;
+}
+
+:root{
+ --maincolor: #81B622;
+ --border:.1rem solid rgba(0,0,0,.1);
+ --box-shadow:0 .5rem 1.5rem rgba(0,0,0,.1);
+ --radius: .5rem;
+ --black:#555;
+}
+
+body{
+    background: #f9f9f9;
+}
+
+header{
+    width: 100%;
+    height: 1.5rem;
+    background: var(--maincolor);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    left: 0;
+    padding: 2.5rem 15%;
+}
+
+header .logo{
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: #555;
+}
+
+header img{
+    height: 2.5rem;
+    margin-right: 1rem;
+}
+
+header nav ul{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+}
+
+header nav ul li{
+    margin-left: 2.6rem;
+}   
+
+header nav ul li a{
+    color: #333;
+    font-size: 1.5rem;
+
+}   
+
+header nav ul li a .border:hover{
+    color: #e8e4c9;
+}
+
+header nav ul li a:hover{
+    color: #e8e4c9;
+    border-bottom: .2rem solid var #e8e4c9;
+    padding: .7rem 0;
+}   
+
+
+#home .box-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#home h1{
+    text-align: center;
+    color: #555;
+    font-size: 3rem;
+    padding: 1.5rem;
+}
+
+#home .box-container .box img{
+    display: block;
+    margin: 0 auto;
+    width: 100%;  
+    height: 35rem;  
+}
+
+#home .box-container .box p{
+    font-size: 1.6rem;
+    padding: 1rem;
+}
+
+
+#aktualitates h2{
+    font-size: 2.5rem;
+    text-align: center;
+    padding: 2rem 0 .5rem 0;
+}
+
+#aktualitates .box-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+#aktualitates .box-container .box{
+    background: #fff;
+    border: .1rem solid rgba(0,0,0,.1);
+    padding: .9rem;
+    width: 70%;
+    margin: 1rem;
+    border-radius: .5rem;
+}
+
+#aktualitates .box-container .box h3{
+    font-size: 1.6rem;
+    text-align: center;
+    padding: .3rem 0;
+}
+
+#aktualitates .box-container .box p{
+    text-align: justify;
+    margin: 1rem .5rem;
+    padding: 0 0.3rem;
+}
+
+#aktualitates .box-container .box img{
+    width: 30rem;
+    height: 20rem;
+    float: left;
+    margin-right: 1.2rem;
+    padding: .9rem;
+}
+
+
+#vakances h2{
+    font-size: 2.7rem;
+    text-align: center;
+    padding: 2rem 0 .5rem 0;
+}
+
+#vakances .box-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+#vakances .box-container .box{
+    background: #fff;
+    border: .1rem solid rgba(0,0,0,.1);
+    padding: .5rem;
+    margin: 1rem;
+    border-radius: .5rem;
+    width: 70%;
+}
+
+#vakances .box-container .box h3{
+    font-size: 1.6rem;
+    text-align: center;
+    padding: .3rem 0;
+}
+
+#vakances .box-container .box p{
+    text-align: justify;
+    margin: .7rem 0;
+    padding: .2rem .8rem;
+}
+
+#vakances .box-container .box img{
+    float: right;
+    margin-left: 1rem;
+    width: 30rem;
+    height: 20rem;
+    padding: .9rem;
+}
+
+
+#vakances .box-container .box a {
+    margin: 0.5rem 1rem;
+    align-items: center;
+}
+
+#vakances .box-container .box .btn:hover{
+    background: #324d00;
+}
+
+#pakalpojumi h2{
+    font-size: 2.5rem;
+    text-align: center;
+    padding: 2rem 0 .5rem 0;
+}
+
+#pakalpojumi .box-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+#pakalpojumi .box-container .box{
+    background: #fff;
+    border: .1rem solid rgba(0,0,0,.1);
+    padding: .5rem;
+    margin: 1rem;
+    border-radius: .5rem;
+    width: 70%;
+}
+
+#pakalpojumi .box-container .box h3{
+    font-size: 1.6rem;
+    text-align: center;
+    padding: .3rem 0;
+}
+
+#pakalpojumi .box-container .box p{
+    text-align: justify;
+    margin: .7rem 0;
+    padding: .2rem .8rem;
+}
+
+#pakalpojumi .box-container .box img{
+    float: right;
+    margin-left: 1rem;
+    width: 30rem;
+    height: 20rem;
+    padding: .9rem;
+}
+
+#pakalpojumi .box-container .box a .btn{
+    padding: 15rem;
+}
+
+span{
+    font-weight: bold;
+}
+
+.btn{
+    display:inline-block;
+    margin-top: 1rem;
+    padding: .8rem 3rem;
+    border-radius: 1rem;
+    background: var(--maincolor);
+    color: #fff;
+    overflow: hidden;
+    font-size: 1.2rem;
+}
+
+
+
+footer .box-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #81B622;
+    flex-wrap: wrap;
+}
+
+
+footer .box-container .box p{
+    width: 20rem;
+    padding: .3rem 0;
+ 
+}
+
+footer .box-container .box p i {
+    color: #333;
+    padding-right: .9rem;
+}
+
+footer .box-container .box h2{
+    padding: 1rem 0 1.5rem 0;
+    color:#f9f9f9;
+}
+
+footer .box-container .box ul li{
+    margin-bottom: 1.2rem;
+    list-style-type: none;
+   
+}
+
+footer .box-container .box ul li a{
+    color: #000;
+}
+
+
+footer .box-container .box a i{
+    margin: .5rem .5rem 0 0;
+    border-radius: 10rem;
+    padding: .7rem;
+    font-size: 1rem;
+}
+
+div .box-container h4{
+    color:#f9f9f9;
+    font-size: 2rem;
+}
+
+#pieteiksanas{
+    padding:2rem 15%;
+}
+
+#pieteiksanas h2{
+    text-align: center;
+    font-size: 2rem;
+}
+
+
+#pieteiksanas .row{
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: column wrap;
+    gap: 1.5rem;
+}
+
+#pieteiksanas .row form{
+    flex:1 1 45rem;
+    padding:2rem;
+    border:var(--border);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--radius);
+}
+
+#pieteiksanas .row form .box1{
+    margin:.7rem 0;
+    padding: 1rem;
+    font-size: 1rem;
+    color:var(--black);
+    border-radius: var(--radius);
+    border:var(--border);
+    background:#EEE;
+    text-transform: none;
+    width: 49.8%;
+}
+
+#pieteiksanas .row form .box1:focus{
+    background:#e8e4c9;
+}
+
+#pieteiksanas .row form .box2{
+    margin:.7rem 0;
+    padding: 1rem;
+    font-size: 1rem;
+    color:var(--black);
+    border-radius: var(--radius);
+    border:var(--border);
+    background: #f7f7f7;
+    text-transform: none;
+    width: 100%;
+    height: 7rem;
+}
+
+#pieteiksanas .row form .box2:focus{
+    background:#e8e4c9;
+}
+
+#pieteiksanas .row form textarea{
+    height: 20rem;
+    resize: none;
+}
+
+#pieteiksanas .row form .btn{
+    width: 100%;
+}
+
+#pieteiksanas .row form .btn:hover{
+    background: #eee;
+    color: var(--maincolor);
+}
+
+@media(max-width: 1050px){
+    #vakances .box-container .box img{
+        width: 100%;
+    }
+    #aktualitates .box-container .box img{
+        width: 100%;
+    }
+
+    #pakalpojumi .box-container .box img{
+        width: 100%;
+    }
+}
+
+
+@media(max-width: 450px){
+    #aktualitates .box-container .box{
+        width: 90%;
+    }
+
+    #vakances .box-container .box{
+        width: 90%;
+    }
+
+    #pakalpojumi .box-container .box{
+        width: 90%;
+    }
+}
+
+
+
+@media(max-width: 1511px){
+    #pieteiksanas .row form .box1{
+        margin:.7rem 0;
+        padding: 1rem;
+        font-size: 1rem;
+        color:var(--black);
+        border-radius: var(--radius);
+        border:var(--border);
+        background:#EEE;
+        text-transform: none;
+        width: 100%;
+    }
+
+    #pieteiksanas .row form .box{
+        margin:.7rem 0;
+        padding: 1rem;
+        font-size: 1rem;
+        color:var(--black);
+        border-radius: var(--radius);
+        border:var(--border);
+        background:#EEE;
+        text-transform: none;
+        width: 100%;
+    }
+    
+}
+
+@media(max-width: 725px){
+    header nav ul li{
+        margin-left: 1rem;
+    }   
+}
+
+
+@media(max-width: 615px){
+    header nav ul li a{
+        color: #333;
+        font-size: 1rem;
+    }  
+    
+    
+    header .logo{
+    font-size: 1rem;
+    font-weight: bold;
+    color: #555;
+    }
+
+    header img{
+        height: 1.5rem;
+        margin-right: .5rem;
+    }
+    
+}
