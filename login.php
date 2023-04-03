@@ -27,8 +27,8 @@
                         if(mysqli_num_rows($atrasanas_rezultats) == 1){
                             while($ieraksts = mysqli_fetch_assoc($atrasanas_rezultats)){
                                 if(password_verify($Parole, $ieraksts["parole"])){
-                                    $_SESSION["lietotajvards"] = $ieraksts["Lietotajvards"];
-                                    header("location:./");
+                                    $_SESSION["lietotajvards"] = $ieraksts["lietotajvards"];
+                                    header("location:index.php");
                                 }else{
                                     echo "Nepareizs lietotājvārds vai parole!";
                                 }
@@ -53,7 +53,6 @@
 				<div class="overlay-panel overlay-right">
 					<h1>Esi sveicināts!</h1>
 					<p>Administrēšanas vietne paredzēta tikai administratoriem un moderatoriem</p>
-					<button class="ghost" id="signUp">Doties uz galveno lapu</button>
 				</div>
 			</div>
 		</div>

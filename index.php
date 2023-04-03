@@ -9,7 +9,9 @@
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
-
+<?php
+session_start();
+?>
 <body>
     <header>
         <div class="logo"><img src="images/logo.png">IT ir spēks</div>
@@ -19,9 +21,13 @@
                 <li><a href="#aktualitates">Aktualitātes</a></li>
                 <li><a href="#vakances">Vakances</a></li>
                 <li><a href="#pakalpojumi">Pakalpojumi</a></li>
-                <?php
                 <li><a href="login.php"><i class="fa-solid fa-right-to-bracket border"></i></a></li>
-                  <a href="../files/logout.php"> $lietvards = $_SESSION['lietotajvards']; echo "<b>$lietvards </b>"<i class="fas fa-power-off"></i></a>
+                <?php
+                 if(isset($_SESSION['lietotajvards'])){
+                    echo " <a href='pieteiksanas.html' class='btn'><i class='fa fa-info-circle'></i></a>";
+                    }else{
+                        echo "<li><a href='login.php'><i class='fa-solid fa-right-to-bracket border'></i></a></li>";
+                    }
                 ?>
             </ul>
         </nav>
@@ -46,7 +52,11 @@
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique molestias sapiente,
                  quas modi neque distinctio non illo, quam ut, dolores quasi temporibus inventore consequatur reiciendis provident
                 sit aspernatur labore nemo.</p>
-                
+                <?php
+                if(isset($_SESSION['lietotajvards'])){
+                 echo " <a href='pieteiksanas.html' class='btn'><i class='fa fa-info-circle'></i></a>";
+                 }
+                ?>
             </div> 
     
             <div class="box">
