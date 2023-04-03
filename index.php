@@ -21,10 +21,9 @@ session_start();
                 <li><a href="#aktualitates">Aktualitātes</a></li>
                 <li><a href="#vakances">Vakances</a></li>
                 <li><a href="#pakalpojumi">Pakalpojumi</a></li>
-                <li><a href="login.php"><i class="fa-solid fa-right-to-bracket border"></i></a></li>
                 <?php
                  if(isset($_SESSION['lietotajvards'])){
-                    echo " <a href='pieteiksanas.html' class='btn'><i class='fa fa-info-circle'></i></a>";
+                    echo "<li><a href='files/logout.php'><i class='fa-solid fa-sign-out'></i></a></li>";
                     }else{
                         echo "<li><a href='login.php'><i class='fa-solid fa-right-to-bracket border'></i></a></li>";
                     }
