@@ -23,7 +23,8 @@ session_start();
                 <li><a href="#pakalpojumi">Pakalpojumi</a></li>
                 <?php
                  if(isset($_SESSION['lietotajvards'])){
-                    echo "<li><a href='files/logout.php'><i class='fa-solid fa-sign-out'></i></a></li>";
+                    $lietvards = $_SESSION['lietotajvards']; 
+                    echo "<li><a href='files/logout.php'><i class='fa-solid fa-sign-out'><b>$lietvards</b></i></a></li>";
                     }else{
                         echo "<li><a href='login.php'><i class='fa-solid fa-right-to-bracket border'></i></a></li>";
                     }
@@ -44,35 +45,36 @@ session_start();
 
     <section id="aktualitates">
         <h2>IT jaunākās aktualitātes</h2>
+
+    </div>
+    
         <div class="box-container">
-            <div class="box">
-                <img src="images/akt1.jpg" alt="1.jaunums">
-                <h3>Jauna NVIDIA RTX videokarte.</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique molestias sapiente,
-                 quas modi neque distinctio non illo, quam ut, dolores quasi temporibus inventore consequatur reiciendis provident
-                sit aspernatur labore nemo.</p>
-                <?php
-                if(isset($_SESSION['lietotajvards'])){
-                 echo " <a href='pieteiksanas.html' class='btn'><i class='fa fa-info-circle'></i></a>";
-                 }
-                ?>
-            </div> 
-    
-            <div class="box">
-                <img src="images/akt2.jpg" alt="2.jaunums">
-                <h3>Tiek izstrādāta jauna programmēšanas valoda</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique molestias sapiente,
-                    quas modi neque distinctio non illo, quam ut, dolores quasi temporibus inventore consequatur reiciendis provident
-                   sit aspernatur labore nemo.</p>
-            </div> 
-    
-            <div class="box">
-                <img src="images/akt3.jpg" alt="3.jaunums">
-                <h3>Automātiska WEB izstrādes programmatūra drīzumā klāt</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique molestias sapiente,
-                    quas modi neque distinctio non illo, quam ut, dolores quasi temporibus inventore consequatur reiciendis provident
-                   sit aspernatur labore nemo.</p>
-            </div> 
+        <?php
+        if(isset($_SESSION['lietotajvards'])){
+            echo " <a href='pievienot.php' class='btn'><i class='fa fa-info-circle'></i>Pievienot</a>";
+            }
+            require("files/connect_db.php");
+
+            $aktualitatesVaicajums = "SELECT * from aktualitates";
+            $atlasaAktualiates = mysqli_query($savienojums, $aktualitatesVaicajums);
+            
+            if(mysqli_num_rows($atlasaAktualiates) > 0){ //atlasa rindas skaitu
+                while($ieraksts = mysqli_fetch_assoc($atlasaAktualiates)){
+                    echo "
+                    <div class='box'>
+                        <img src='{$ieraksts['bilde']}'>
+                        <h3>{$ieraksts['nosaukums']}</h3>
+                        <p>{$ieraksts['apraksts']}</p>
+                        <form action='entry.php' method='post'>
+                            <button type='submit' name='pieteikties' class='btn' value='{$ieraksts['nosaukums']}'>Pieteikties</button>
+                        </form>
+                    </div>
+                    ";
+                }
+            }else{
+                echo "Nav nevienas specialitātes";
+            }
+        ?>
         </div>
     </section>
     <section id="vakances">
