@@ -68,14 +68,15 @@ session_start();
                     <div class='box'>
                         <img src='{$ieraksts['bilde']}'>
                         <h3>{$ieraksts['nosaukums']}</h3>
-                        <p>{$ieraksts['apraksts']}</p>
-                        <form action='entry.php' method='post'>
+                        <p>{$ieraksts['apraksts']}</p> </div>";
+                        if(isset($_SESSION['lietotajvards'])){
+                        echo "<form action='entry.php' method='post'>
                             <button type='submit' name='pieteikties' class='btn' value='{$ieraksts['nosaukums']}'>Rediget</button>
-                        </form>
-                    </div>
-                    ";
+                        </form>";
+                        }
+                    }
                 }
-            }else{
+                else{
                 echo "Nav nevienas specialitātes";
             }
         ?>

@@ -32,8 +32,22 @@ if(isset($_SESSION['lietotajvards'])){
 
     <section id="pieteiksanas">
         <?php
+        require "files/connect_db.php";
         if(isset($_POST['pievienot'])){
             $nosaukums = $_POST['nosaukums'];
+            $apraksts = $_POST['apraksts'];
+            $attels = $_POST['bilde'];
+            if(!empty($nosaukums) && !empty($apraksts) && !empty($attels)){
+                $pievienotAktualitateSQL = "INSERT INTO aktualitates(nosaukums,apraksts,bilde) 
+                VALUES ('$nosaukums', '$apraksts', '$attels')";
+                if(mysqli_query($savienojums, $pievienotAktualitateSQL)){
+                echo "<div class = 'pieteiksanaskluda zals'>Specialitāte ir veiksmīgi pievienojusies!</div>";
+                header("Refresh:2; url=index.php");
+                 }else{
+                echo "<div class = 'pieteiksanaskluda sarkans'>Specialitāte nav pievienojusies. Mēģini vēlreiz!</div>";
+                header("Refresh:2; url=index.php");
+             }
+            }
         }
 
 
