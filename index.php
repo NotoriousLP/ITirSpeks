@@ -51,7 +51,11 @@ session_start();
         <div class="box-container">
         <?php
         if(isset($_SESSION['lietotajvards'])){
-            echo " <a href='pievienot.php' class='btn'><i class='fa fa-info-circle'></i>Pievienot</a>";
+           echo " <form action = 'pievienot.php' method = 'post'>
+                                    <button type='submit' name='pievienotAktualitates' value='pievienotAktualitates' class='btn'>
+                                    <i class='fas fa-edit'></i>
+                                    </button>
+                                    </form>";
             }
             require("files/connect_db.php");
 
@@ -66,7 +70,7 @@ session_start();
                         <h3>{$ieraksts['nosaukums']}</h3>
                         <p>{$ieraksts['apraksts']}</p>
                         <form action='entry.php' method='post'>
-                            <button type='submit' name='pieteikties' class='btn' value='{$ieraksts['nosaukums']}'>Pieteikties</button>
+                            <button type='submit' name='pieteikties' class='btn' value='{$ieraksts['nosaukums']}'>Rediget</button>
                         </form>
                     </div>
                     ";

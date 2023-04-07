@@ -9,36 +9,47 @@
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
-
+<?php
+session_start();
+if(isset($_SESSION['lietotajvards'])){
+?>
 <body>
     <header>
         <div class="logo"><img src="images/logo.png">IT ir spēks</div>
         <nav class="nav">
             <ul>
-                <li><a href="index.html">Sākums</a></li>
-                <li><a href="index.html">Aktualitātes</a></li>
-                <li><a href="index.html">Vakances</a></li>
-                <li><a href="index.html">Pakalpojumi</a></li>
-                <li><a href="login.html"><i class="fa-solid fa-right-to-bracket"></i></a></li>
+                <li><a href="index.php">Sākums</a></li>
+                <li><a href="index.php">Aktualitātes</a></li>
+                <li><a href="index.php">Vakances</a></li>
+                <li><a href="index.php">Pakalpojumi</a></li>
+                <?php
+                    $lietvards = $_SESSION['lietotajvards']; 
+                    echo "<li><a href='files/logout.php'><i class='fa-solid fa-sign-out'><b>$lietvards</b></i></a></li>";
+                ?>
             </ul>
         </nav>
     </header>
 
     <section id="pieteiksanas">
-        <h2>Pieteikšanās</h2>
-                    <div class="row">
-                        <form method="POST">
-                            <input type="text" placeholder="Vārds *" name="vards" class="box1" title="Vārds" required>
-                            <input type="text" placeholder="Uzvārds *" name="uzvards" class="box1" title="Uzvārds" required>
-                            <input type="number" placeholder="Tālrunis *" name="talrunis" class="box1" title="Tālrunis" required>
-                            <input type="email" placeholder="E-pasts *" name="epasts" class="box1" title="E-pasts" required>
-                            <input type="text" placeholder="Komentārs" name="adrese" class="box2" title="Komentārs" >
-                            <input type="text" placeholder="Darba pieredze" name="darbaPieredze" class="box2" title="Darba pieredze">
-                            <input type="text" placeholder="Digitāla prasme" name="digitalaPrasme" class="box2" title="Digitāla prasme" >
-                            <input type="text" placeholder="Izglītība" name="izglitiba" class="box2" title="Izglītība">
-                            <input type="submit" value="Pieteikties!" name="gatavs" class="btn">
+        <?php
+        if(isset($_POST['pievienot'])){
+            $nosaukums = $_POST['nosaukums'];
+        }
+
+
+        $koPievienot = $_POST['pievienotAktualitates'];
+        if(isset($_POST['pievienotAktualitates'])){
+        echo "<h2>Pievienot $koPievienot</h2>
+                    <div class='row'>
+                        <form method='post'>
+                            <input type='text' placeholder='Nosaukums *' name='nosaukums' class='box1' title='Nosaukums' required>
+                            <input type='text' placeholder='Apraksts *' name='apraksts' class='box2' title='Apraksts' required>
+                            <input type='text' placeholder='bilde *' name='bilde' class='box1' title='bilde' required>
+                            <button type='submit' name='pievienot' class='btn'>Pievienot</button>
                         </form>
-                    </div>
+                    </div> ";
+        }
+        ?>
     </section>
 
     <footer id="parmums kontakti">
@@ -56,8 +67,12 @@
     <p><i class="fa-solid fa-location-dot"></i>Latvija</p>
 
     </div>
-    
+    <?php
+    }else{
+    echo "<div class = 'pieteiksanaskluda sarkans'>Jums šeit nav pieeja atļauta!</div>";
+    header("Refresh:2; index.php");
+    }
+    ?>   
     </footer>
-            
 </body>
 </html>
