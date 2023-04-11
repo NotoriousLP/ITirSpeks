@@ -235,11 +235,10 @@ require("files/connect_db.php");
             $dzestLietotajuSQL = "DELETE from lietotajs WHERE lietotajs_id = ".$_POST['dzestLietotaju'];
             
              if(mysqli_query($savienojums, $dzestLietotajuSQL)){
-             echo "<div class='pieteiksanaskluda zals'>Specialitāte veiksmīgi izdzēsta!</div>";
-             header("Refresh:2;");
+             echo "<div class='pieteiksanaskluda zals'>Lietotājs veiksmīgi izdzēsts!</div>";
              }else{
+             header("Refresh:2; url=index.php");  
              echo "<div class='pieteiksanaskluda sarkans'>Kļūda sistēmā!</div>";
-             header("Refresh:2;");
             }
          }
     ?>
@@ -326,7 +325,7 @@ require("files/connect_db.php");
                         <td>{$ieraksts['izglitiba']}</td>
                         <td>{$ieraksts['stat_nosaukums']}</td>
                         <td>
-                            <form action = 'pievienot.php' method = 'post'>
+                            <form action = 'statusaPiesk.php' method = 'post'>
                                 <button type='submit' name='apskatit' value='{$ieraksts['vakancesPieteiksanas_id']}' class='btn4'>
                                 <i class='fas fa-edit'></i>
                                 </button>
