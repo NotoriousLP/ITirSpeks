@@ -252,6 +252,7 @@ require("files/connect_db.php");
             <tr>
                 <th>Lietotājs</th>
                 <th>Statuss</th>
+                <th></th>
             </tr>
         <?php
         $lietotajaVaicajums = "SELECT *from lietotajs";
@@ -290,8 +291,58 @@ require("files/connect_db.php");
     <?php
      if(isset($_SESSION['lietotajvards'])){
     ?>
+    <section class="admin">
 
-    <?php}?>
+    <div class="row">
+        <div class="info">
+            <div class="head-info head-color">Vakanču administrēšana:</div>
+            <table class="adminTabula">
+            <tr>
+                <th>Vārds</th>
+                <th>Uzvārds</th>
+                <th>Tālrunis</th>
+                <th>Komentārs</th>
+                <th>Darba pieredze</th>
+                <th>Digitālā prasme</th>
+                <th>Izglītība</th>
+                <th>Statuss</th>
+                 <th></th>
+            </tr>
+
+            <?php
+                $atlasit_pieteikumus_SQL = "SELECT * from vakancespieteiksanas as vp 
+                INNER JOIN statuss as st ON vp.id_statuss = statuss_id";
+                $atlasa_pieteikumus = mysqli_query($savienojums, $atlasit_pieteikumus_SQL);
+
+                while($ieraksts = mysqli_fetch_assoc($atlasa_pieteikumus)){
+                    echo "
+                    <tr>
+                        <td>{$ieraksts['vards']}</td>
+                        <td>{$ieraksts['uzvards']}</td>
+                        <td>{$ieraksts['talrunis']}</td>
+                        <td>{$ieraksts['komentars']}</td>
+                        <td>{$ieraksts['darbaPieredze']}</td>
+                        <td>{$ieraksts['digitalaPrasme']}</td>
+                        <td>{$ieraksts['izglitiba']}</td>
+                        <td>{$ieraksts['stat_nosaukums']}</td>
+                        <td>
+                            <form action = 'pievienot.php' method = 'post'>
+                                <button type='submit' name='apskatit' value='{$ieraksts['vakancesPieteiksanas_id']}' class='btn4'>
+                                <i class='fas fa-edit'></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    ";
+                }
+            ?>
+            </table>
+        </div>
+        </div>
+    </section>
+    <?php
+    }
+    ?>
     <footer id="parmums kontakti">
         <div class="box-container">
     <div class="box">

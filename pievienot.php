@@ -237,5 +237,3 @@
     header("Refresh:2;index.php");
     }
     ?>
-</body>
-</html>
