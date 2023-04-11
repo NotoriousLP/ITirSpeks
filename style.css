@@ -503,6 +503,40 @@ select {
     margin-top: 1.2rem;
     font-size: 1rem;
   }
+
+.pazinojums p{
+    animation: blinker 2s linear infinite;
+}
+
+.pieteiksanaskluda{
+    font-size: 2rem;
+    text-align: center;
+    margin: 5rem;
+    padding: 3rem;
+    color: #eee;
+    border-radius: var(--radius);
+    border:var(--border);
+}
+
+.pieteiksanaskluda a{
+    color: #ccc;
+    font-weight: bold;
+}
+
+.pieteiksanaskluda a:hover{
+    color: #eee;
+    text-decoration: underline;
+}
+
+.pieteiksanaskluda.sarkans{
+    background: #a14141;
+}
+
+.pieteiksanaskluda.zals{
+    background: #57a141;
+}
+
+
 @media(max-width: 1050px){
     #vakances .box-container .box img{
         width: 100%;

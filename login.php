@@ -19,7 +19,7 @@
 
                         $Lietotajvards = mysqli_real_escape_string($savienojums, $_POST["lietotajs"]);
                         $Parole = mysqli_real_escape_string($savienojums, $_POST["parole"]);
-                        // $adminStatus = mysqli_real_escape_string($savienojums, $_POST["adminStatus"]);
+                        $adminStatus = mysqli_real_escape_string($savienojums, $_POST["adminStatus"]);
 
                         $lietotaja_atrasana_SQL = "SELECT * FROM lietotajs WHERE lietotajvards = '$Lietotajvards'";
                         $atrasanas_rezultats = mysqli_query($savienojums, $lietotaja_atrasana_SQL);
@@ -28,6 +28,12 @@
                             while($ieraksts = mysqli_fetch_assoc($atrasanas_rezultats)){
                                 if(password_verify($Parole, $ieraksts["parole"])){
                                     $_SESSION["lietotajvards"] = $ieraksts["lietotajvards"];
+                                    $privilegijasStatuss = $ieraksts['adminStatus'];
+                                    if($privilegijasStatuss == 1){
+                                        $_SESSION["adminStatus"] = 1;
+                                    }else{
+                                        $_SESSION["adminStatus"] = 0;
+                                    }
                                     header("location:index.php");
                                 }else{
                                     echo "Nepareizs lietotājvārds vai parole!";

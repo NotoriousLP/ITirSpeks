@@ -24,8 +24,9 @@ require("files/connect_db.php");
                 <li><a href="#pakalpojumi">Pakalpojumi</a></li>
                 <?php
                 if(isset($_SESSION['lietotajvards'])){
-                echo "<li><a href='#admin'>Lietotāji</a></li>";
                 echo "<li><a href='#lietotaji'>Pieteikumi</a></li>";
+                if($_SESSION["adminStatus"] == 1 )
+                echo "<li><a href='#admin'>Lietotāji</a></li>";
                 
             }
                 ?>
@@ -106,7 +107,7 @@ require("files/connect_db.php");
                     }
                 }
                 else{
-                echo "Nav nevienas specialitātes";
+                echo "Nav aktualitātes";
             }
             ?>
         </div>
@@ -148,8 +149,8 @@ require("files/connect_db.php");
                         <p><span>Atrašanās vieta:</span> {$ieraksts['atrasanasVieta']}</p>
                         <p><span>Vakanču skaits:</span> {$ieraksts['vakancuSkaits']}</p>
                         <p><span>Darba laiks/veids:</span> {$ieraksts['darbaLaiksVeids']}</p>
-                        <p><span>Alga</span>{$ieraksts['alga']}</p>";
-                                  
+                        <p><span>Alga:</span> {$ieraksts['alga']}</p>
+                        <a href='pieteiksanas.php' class='btn'><i class='fa fa-info-circle'></i> Pieteikties</a>";
                         if(isset($_SESSION['lietotajvards'])){
                         echo "<form action='pievienot.php' method='post'>
                         <button type='submit' name='redigetVakances' value='{$ieraksts['vakances_id']}' class='btn'>
@@ -166,87 +167,70 @@ require("files/connect_db.php");
                     
                     }
                 }else{
-                echo "Nav nevienas specialitātes";
+                echo "Nav vakanču";
             }
         ?>
-            <div class="box">
-                <img src="images/programmer.jpg" alt="1.vakance">
-                <h3>Programmētājs</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique molestias sapiente,
-                 quas modi neque distinctio non illo, quam ut, dolores quasi temporibus inventore consequatur reiciendis provident
-                sit aspernatur labore nemo.</p>
-                <p><span>Atrašanās vieta:</span> Liepāja, Latvija</p>
-                <p><span>Vakanču skaits:</span> 5</p>
-                <p><span>Darba laiks/veids:</span> 8:00-15:00 / atālināti</p>
-                <p><span>Alga:</span> 1500 euro mēnesī bruto</p>
-                <a href="pieteiksanas.php" class="btn"><i class="fa fa-info-circle"></i> Pieteikties</a>
-            </div> 
-    
-            <div class="box">
-                <img src="images/slud2.jpg" alt="2.vakance">
-                <h3>WEB programmētājs</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique molestias sapiente,
-                 quas modi neque distinctio non illo, quam ut, dolores quasi temporibus inventore consequatur reiciendis provident
-                sit aspernatur labore nemo.</p>
-                <p><span>Atrašanās vieta:</span> Liepāja, Latvija</p>
-                <p><span>Vakanču skaits:</span> 5</p>
-                <p><span>Darba laiks/veids:</span> 8:00-15:00 / atālināti</p>
-                <p><span>Alga:</span> 2500 euro mēnesī bruto</p>
-                <a href="pieteiksanas.php" class="btn"><i class="fa fa-info-circle"></i>Pieteikties</a>
-            </div> 
-    
-            <div class="box">
-                <img src="images/slud3.jpg" alt="3.vakance">
-                <h3>PHP programmētājs</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique molestias sapiente,
-                 quas modi neque distinctio non illo, quam ut, dolores quasi temporibus inventore consequatur reiciendis provident
-                sit aspernatur labore nemo.</p>
-                <p><span>Atrašanās vieta:</span> Liepāja, Latvija</p>
-                <p><span>Vakanču skaits:</span> 5</p>
-                <p><span>Darba laiks/veids:</span> 8:00-15:00 / atālināti</p>
-                <p><span>Alga:</span> 5500 euro mēnesī bruto</p>
-                <a href="pieteiksanas.php" class="btn btn1"><i class="fa fa-info-circle"></i>Pieteikties</a>
-            </div> 
         </div>
     </section>
     <section id="pakalpojumi">
         <h2>IT <span>jaunākie</span> pakalpojumi</h2>
         <div class="box-container">
-            <div class="box">
-                <img src="images/slud4.jpg" alt="1.pakalpojumus">
-                <h3>Operētājsistēmas uzinstelētājs</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique molestias sapiente,
-                 quas modi neque distinctio non illo, quam ut, dolores quasi temporibus inventore consequatur reiciendis provident
-                sit aspernatur labore nemo.</p>
-                <p><span>Atrašanās vieta:</span> Liepāja, Latvija</p>
-                <p><span>Tālrunis:</span> +371 29 912 412</p>
+        <?php
+            if(isset($_SESSION['lietotajvards'])){
+                    echo " <form action = 'pievienot.php' method = 'post'>
+                                             <button type='submit' name='pievienotPakalp' value='pievienotPakalp' class='btn'>
+                                             <i class='fas fa-circle-plus'></i>
+                                             </button>
+                                             </form>";
+              }
 
-            </div> 
-    
-            <div class="box">
-                <img src="images/pak2.jpg" alt="1.pakalpojumus">
-                <h3>Uzprogrammēs jebko</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique molestias sapiente,
-                 quas modi neque distinctio non illo, quam ut, dolores quasi temporibus inventore consequatur reiciendis provident
-                sit aspernatur labore nemo.</p>
-                <p><span>Atrašanās vieta:</span> Liepāja, Latvija</p>
-                <p><span>Tālrunis:</span> +371 23 477 412</p>
-            </div> 
-    
-            <div class="box">
-                <img src="images/pak3.jpg" alt="1.pakalpojumus">
-                <h3>Tev uztaisīs jebkādu WEB mājaslapu</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique molestias sapiente,
-                 quas modi neque distinctio non illo, quam ut, dolores quasi temporibus inventore consequatur reiciendis provident
-                sit aspernatur labore nemo.</p>
-                <p><span>Atrašanās vieta:</span> Liepāja, Latvija</p>
-                <p><span>Tālrunis:</span> +371 23 412 413</p>
-            </div> 
+              if(isset($_POST['dzestPakalp'])){
+                $dzestAktualitatiSQL = "DELETE from vakances WHERE vakances_id = ".$_POST['dzestVakances'];
+                
+                 if(mysqli_query($savienojums, $dzestAktualitatiSQL)){
+                 echo "<div class='pieteiksanaskluda zals'>Pakalpojumi veiksmīgi izdzēsta!</div>";
+                 header("Refresh:2; url=index.php");
+                 }else{
+                 echo "<div class='pieteiksanaskluda sarkans'>Kļūda sistēmā!</div>";
+                 header("Refresh:2; url=index.php");
+                }
+             }
+
+            $pakalpVaicajums = "SELECT * from pakalpojumi";
+            $atlasaPakalp = mysqli_query($savienojums, $pakalpVaicajums);
+            
+            if(mysqli_num_rows($atlasaPakalp) > 0){ //atlasa rindas skaitu
+                while($ieraksts = mysqli_fetch_assoc($atlasaPakalp)){
+                    echo "
+                    <div class='box'>
+                        <img src='{$ieraksts['bilde']}'>
+                        <h3>{$ieraksts['nosaukums']}</h3>
+                        <p>{$ieraksts['apraksts']}</p>
+                        <p><span>Atrašanās vieta:</span> {$ieraksts['atrasanasVieta']}</p>
+                        <p><span>Tālrunis:</span> {$ieraksts['talrunis']}</p>";
+                        if(isset($_SESSION['lietotajvards'])){
+                        echo "<form action='pievienot.php' method='post'>
+                        <button type='submit' name='redigetPakalp' value='{$ieraksts['pakalpojumi_id']}' class='btn'>
+                        <i class='fas fa-edit'></i>
+                        </button> </form> 
+                        
+                        <form method = 'post'>
+                        <button type='submit' name='dzestPakalp' value='{$ieraksts['pakalpojumi_id']}' class='btn'>
+                        <i class='fas fa-trash'></i>
+                        </button>
+                        </form>
+                        </div>";
+                        }else{ echo "</div>"; }
+                    
+                    }
+                }else{
+                echo "Nav pakalpojuma";
+            }
+        ?>
         </div>
     </section>
     <?php
-     if(isset($_SESSION['lietotajvards'])){
-        
+     if(isset($_SESSION['lietotajvards']) && $_SESSION["adminStatus"] == 1 ){
         if(isset($_POST['dzestLietotaju'])){
             $dzestLietotajuSQL = "DELETE from lietotajs WHERE lietotajs_id = ".$_POST['dzestLietotaju'];
             
@@ -301,9 +285,13 @@ require("files/connect_db.php");
             </div>
         </section>
     <?php
-    }
+        }
+    ?>
+    <?php
+     if(isset($_SESSION['lietotajvards'])){
     ?>
 
+    <?php}?>
     <footer id="parmums kontakti">
         <div class="box-container">
     <div class="box">
