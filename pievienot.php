@@ -1,42 +1,55 @@
-<!DOCTYPE html>
-<html lang="lv">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT ir spēks</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-</head>
 <?php
-session_start();
-if(isset($_SESSION['lietotajvards'])){
+     session_start();
+    if(isset($_SESSION['lietotajvards'])){
+        $page = "pievienot";
+    require "files/header.php";
 ?>
-<body>
-    <header>
-        <div class="logo"><img src="images/logo.png">IT ir spēks</div>
-        <nav class="nav">
-            <ul>
-                <li><a href="index.php">Sākums</a></li>
-                <li><a href="index.php">Aktualitātes</a></li>
-                <li><a href="index.php">Vakances</a></li>
-                <li><a href="index.php">Pakalpojumi</a></li>
-                <?php
-                    $lietvards = $_SESSION['lietotajvards']; 
-                    echo "<li><a href='files/logout.php'><i class='fa-solid fa-sign-out'><b>$lietvards</b></i></a></li>";
-                ?>
-            </ul>
-        </nav>
-    </header>
 
     <section id="pieteiksanas">
         <?php
         require "files/connect_db.php";
-        if(isset($_POST['pievienot'])){
+        if(isset($_POST['pievienotVakances1'])){
             $nosaukums = $_POST['nosaukums'];
             $apraksts = $_POST['apraksts'];
             $attels = $_POST['bilde'];
+            $atrVieta = $_POST['atrVieta'];
+            $darbLaikVeids = $_POST['darbLaikVeid'];
+            $vakSkaits = $_POST['vakSkaits'];
+            $alga = $_POST['alga'];
+            if(!empty($nosaukums) && !empty($apraksts) && !empty($attels) && !empty($atrVieta) && !empty($darbLaikVeids) && !empty($alga) && !empty($vakSkaits)){
+                $pievienotVakanceSQL = "INSERT INTO vakances(nosaukums,apraksts,atrasanasVieta, vakancuSkaits, darbaLaiksVeids, alga, bilde) 
+                VALUES ('$nosaukums', '$apraksts', '$atrVieta' , '$vakSkaits', '$darbLaikVeids' , '$alga' , '$attels')";
+                if(mysqli_query($savienojums, $pievienotVakanceSQL)){
+                echo "<div class = 'pieteiksanaskluda zals'>Specialitāte ir veiksmīgi pievienojusies!</div>";
+                header("Refresh:2; url=index.php");
+                 }else{
+                echo "<div class = 'pieteiksanaskluda sarkans'>Specialitāte nav pievienojusies. Mēģini vēlreiz!</div>";
+                header("Refresh:2; url=index.php");
+             }
+            }
+        }
+
+        if(isset($_POST['redigetAktualitates1'])){
+            $nosaukums1 = $_POST['nosaukums'];
+            $apraksts1 = $_POST['apraksts'];
+            $attels1 = $_POST['bilde'];
+                if(!empty($nosaukums1) && !empty($apraksts1) && !empty($attels1)){
+                    $redigetAktualitateSQL = "UPDATE aktualitates SET nosaukums = '$nosaukums1',
+                    apraksts = '$apraksts1', bilde = '$attels1' WHERE aktualitates_id = ".$_POST['redigetAktualitates1'];
+                    if(mysqli_query($savienojums, $redigetAktualitateSQL)){
+                    echo "<div class = 'pieteiksanaskluda zals'>Specialitāte ir veiksmīgi rediģēta!</div>";
+                    header("Refresh:2; url=index.php");
+                     }else{
+                    echo "<div class = 'pieteiksanaskluda sarkans'>Specialitāte nav veiksmīgi rediģēta. Mēģini vēlreiz!</div>";
+                    header("Refresh:2; url=index.php");
+                 }
+                }
+            }
+        if(isset($_POST['pievienotAktualitates1'])){
+                $nosaukums = $_POST['nosaukums'];
+                $apraksts = $_POST['apraksts'];
+                $bilde = $_POST['bilde'];
+        
             if(!empty($nosaukums) && !empty($apraksts) && !empty($attels)){
                 $pievienotAktualitateSQL = "INSERT INTO aktualitates(nosaukums,apraksts,bilde) 
                 VALUES ('$nosaukums', '$apraksts', '$attels')";
@@ -51,42 +64,83 @@ if(isset($_SESSION['lietotajvards'])){
         }
 
 
-        $koPievienot = $_POST['pievienotAktualitates'];
+        if(isset($_POST['redigetAktualitates'])){
+            $aktualitatesVaicajums = "SELECT * from aktualitates WHERE aktualitates_id =".$_POST['redigetAktualitates'];
+            $atlasaAktualiates = mysqli_query($savienojums, $aktualitatesVaicajums);
+            while($ieraksts = mysqli_fetch_assoc($atlasaAktualiates )){
+            echo "<h2>Rediģēt aktualitātes</h2>
+                    <div class='row'>
+                        <form method='post'>
+                            <input type='text' placeholder='Nosaukums *' name='nosaukums' class='box1' title='Nosaukums' value={$ieraksts['nosaukums']} required>
+                            <input type='text' placeholder='Apraksts *' name='apraksts' class='box2' title='Apraksts' value={$ieraksts['apraksts']} required>
+                            <input type='text' placeholder='bilde *' name='bilde' class='box2' title='bilde' value={$ieraksts['bilde']} required>
+                            <button type='submit' name='redigetAktualitates1' value='{$_POST['redigetAktualitates']}'class='btn'>
+                            <i class='fas fa-edit'></i>
+                            </button>
+                        </form>
+                    </div> ";
+            }
+        }
+
         if(isset($_POST['pievienotAktualitates'])){
-        echo "<h2>Pievienot $koPievienot</h2>
+        echo "<h2>Pievienot aktualitāti</h2>
                     <div class='row'>
                         <form method='post'>
                             <input type='text' placeholder='Nosaukums *' name='nosaukums' class='box1' title='Nosaukums' required>
                             <input type='text' placeholder='Apraksts *' name='apraksts' class='box2' title='Apraksts' required>
-                            <input type='text' placeholder='bilde *' name='bilde' class='box1' title='bilde' required>
-                            <button type='submit' name='pievienot' class='btn'>Pievienot</button>
+                            <input type='text' placeholder='bilde *' name='bilde' class='box2' title='Bilde' required>
+                            <button type='submit' name='pievienotAktualitates1' class='btn'>Pievienot</button>
                         </form>
                     </div> ";
         }
+        
+        if(isset($_POST['redigetVakances'])){
+            $vakancesVaicajums = "SELECT * from vakances WHERE vakances_id =".$_POST['redigetVakances'];
+            $atlasaVakances = mysqli_query($savienojums, $vakancesVaicajums);
+            while($ieraksts = mysqli_fetch_assoc($atlasaVakances )){
+            echo "<h2>Rediģēt vakances</h2>
+                    <div class='row'>
+                        <form method='post'>
+                        <input type='text' placeholder='Nosaukums *' name='nosaukums' class='box1' title='Nosaukums' value={$ieraksts['nosaukums']} required>
+                        <input type='text' placeholder='Apraksts *' name='apraksts' class='box2' title='Apraksts' value={$ieraksts['apraksts']} required>
+                        <input type='text' placeholder='bilde *' name='bilde' class='box1' title='Bilde' value={$ieraksts['bilde']}  required>
+                        <input type='text' placeholder='Atrašanās vieta *' name='atrVieta' class='box1' value={$ieraksts['atrasanasVieta']} title='Atrašanās vieta' required>
+                        <input type='text' placeholder='Vakanču skaits *' name='vakSkaits' class='box1' value={$ieraksts['vakancuSkaits']} title='Vakanču skaits' required>
+                        <input type='text' placeholder='Darba laiks/veids *' name='darbLaikVeid' class='value={$ieraksts['darbaLaiksVeids']} box1' title='Darba laiks/veids' required>
+                        <input type='text' placeholder='Alga *' name='alga' class='box1' title='Alga' value={$ieraksts['alga']} required>
+                            <button type='submit' name='redigetVakances1' value='{$_POST['redigetVakances']}'class='btn'>
+                            <i class='fas fa-edit'></i>
+                            </button>
+                        </form>
+                    </div> ";
+            }
+        }
+
+        if(isset($_POST['pievienotVakances'])){
+            echo "<h2>Pievienot vakanci</h2>
+                        <div class='row'>
+                            <form method='post'>
+                                <input type='text' placeholder='Nosaukums *' name='nosaukums' class='box1' title='Nosaukums' required>
+                                <input type='text' placeholder='Apraksts *' name='apraksts' class='box2' title='Apraksts' required>
+                                <input type='text' placeholder='bilde *' name='bilde' class='box1' title='Bilde' required>
+                                <input type='text' placeholder='Atrašanās vieta *' name='atrVieta' class='box1' title='Atrašanās vieta' required>
+                                <input type='text' placeholder='Vakanču skaits *' name='vakSkaits' class='box1' title='Vakanču skaits' required>
+                                <input type='text' placeholder='Darba laiks/veids *' name='darbLaikVeid' class='box1' title='Darba laiks/veids' required>
+                                <input type='text' placeholder='Alga *' name='alga' class='box1' title='Alga' required>
+                                <button type='submit' name='pievienotVakances1' class='btn'>Pievienot</button>
+                            </form>
+                        </div> ";
+            }
+    
         ?>
     </section>
 
-    <footer id="parmums kontakti">
-        <div class="box-container">
-    <div class="box">
-        <h2>Par mums</h2>
-        <p>2023. gada februārī, mēs palīdzējam atrast vakanci 1126 cilvēkiem, un turpinam meklēt darbu cilvēkiem.
-    </div>
-
-    
-    <div class="box">
-    <h2>Kontakti</h2>
-    <p><i class="fa-solid fa-phone"></i>+371 22 345 622</p>
-    <p><i class="fa-solid fa-envelope"></i>vakances@latvia.lv</p>
-    <p><i class="fa-solid fa-location-dot"></i>Latvija</p>
-
-    </div>
     <?php
+    require "files/footer.php";
     }else{
     echo "<div class = 'pieteiksanaskluda sarkans'>Jums šeit nav pieeja atļauta!</div>";
-    header("Refresh:2; index.php");
+    header("Refresh:2;index.php");
     }
-    ?>   
-    </footer>
+    ?>
 </body>
 </html>

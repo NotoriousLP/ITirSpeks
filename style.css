@@ -261,6 +261,22 @@ span{
     font-size: 1.2rem;
 }
 
+.btn4{
+    display: inline-block;
+    padding: .8rem 1.5rem;
+    margin: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    cursor: pointer;
+    color:#fff;
+    background:var(--maincolor);
+    border-radius: var(--radius);
+    box-shadow: var(--box-shadow);
+}
+
+.btn4:hover{
+    background:var(--black);
+}
 
 
 footer .box-container{
@@ -383,6 +399,110 @@ div .box-container h4{
     color: var(--maincolor);
 }
 
+.tabulasApraksts{
+    width: 80rem;
+    padding: 2rem;
+}
+
+#lietotaji .row .info .adminTabula tr th{
+    margin: 1rem;
+    padding: 0 auto;
+}
+
+
+#lietotaji .row .info .adminTabula tr td input{
+    padding: 1rem;
+    background-color: rgba(167, 161, 161, 0.1);
+    border-radius: 1rem;
+    width: 90rem;
+    height: 5rem;
+    margin: .5rem;
+}
+
+
+
+#lietotaji .row .info .adminTabula tr{
+    margin: 1rem;
+}
+
+#lietotaji .row{
+    margin-top: 10rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+#lietotaji .row .info{
+    flex:1 1 45rem;
+    border:var(--border);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--radius);
+}
+
+#lietotaji .row .info2{
+    flex:1 1 20rem;
+    border:var(--border);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--radius);
+}
+
+.head-info{
+    background-color: #f8f8f8;
+    color: var(--black);
+    padding: 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+}
+
+.head-color{
+    background-color: var(--bg);
+}
+
+table{
+    font-size: 1rem;
+	width: 100%;
+}
+
+th, td{
+	text-align: center;
+	height: 50px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover{
+	background-color: var(--bg);
+}
+
+th{
+	font-weight: bold;
+	color: var(--black);
+	text-align:center;
+}
+
+
+.btn3{
+    padding: .8rem 1.5rem;
+    text-align: right;
+    font-size: 1.5rem;
+    font-weight: 400;
+    cursor: pointer;
+    color:#fff;
+    background:var(--maincolor);
+    border-radius: var(--radius);
+    box-shadow: var(--box-shadow);
+}
+
+.btn3:hover{
+    background:var(--black);
+}
+
+select {
+    margin-bottom: 1.2rem;
+    margin-left: 1rem;
+    margin-top: 1.2rem;
+    font-size: 1rem;
+  }
 @media(max-width: 1050px){
     #vakances .box-container .box img{
         width: 100%;

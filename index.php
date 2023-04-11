@@ -11,6 +11,7 @@
 </head>
 <?php
 session_start();
+require("files/connect_db.php");
 ?>
 <body>
     <header>
@@ -21,6 +22,13 @@ session_start();
                 <li><a href="#aktualitates">Aktualitātes</a></li>
                 <li><a href="#vakances">Vakances</a></li>
                 <li><a href="#pakalpojumi">Pakalpojumi</a></li>
+                <?php
+                if(isset($_SESSION['lietotajvards'])){
+                echo "<li><a href='#admin'>Lietotāji</a></li>";
+                echo "<li><a href='#lietotaji'>Pieteikumi</a></li>";
+                
+            }
+                ?>
                 <?php
                  if(isset($_SESSION['lietotajvards'])){
                     $lietvards = $_SESSION['lietotajvards']; 
@@ -53,11 +61,23 @@ session_start();
         if(isset($_SESSION['lietotajvards'])){
            echo " <form action = 'pievienot.php' method = 'post'>
                                     <button type='submit' name='pievienotAktualitates' value='pievienotAktualitates' class='btn'>
-                                    <i class='fas fa-edit'></i>
+                                    <i class='fas fa-circle-plus'></i>
                                     </button>
                                     </form>";
             }
-            require("files/connect_db.php");
+
+
+            if(isset($_POST['dzestAktualitates'])){
+                $dzestAktualitatiSQL = "DELETE from aktualitates WHERE aktualitates_id = ".$_POST['dzestAktualitates'];
+                
+                 if(mysqli_query($savienojums, $dzestAktualitatiSQL)){
+                 echo "<div class='pieteiksanaskluda zals'>Aktualitāte veiksmīgi izdzēsta!</div>";
+                 header("Refresh:2; url=index.php");
+                 }else{
+                 echo "<div class='pieteiksanaskluda sarkans'>Kļūda sistēmā!</div>";
+                 header("Refresh:2; url=index.php");
+                }
+             }
 
             $aktualitatesVaicajums = "SELECT * from aktualitates";
             $atlasaAktualiates = mysqli_query($savienojums, $aktualitatesVaicajums);
@@ -68,23 +88,87 @@ session_start();
                     <div class='box'>
                         <img src='{$ieraksts['bilde']}'>
                         <h3>{$ieraksts['nosaukums']}</h3>
-                        <p>{$ieraksts['apraksts']}</p> </div>";
+                        <p>{$ieraksts['apraksts']}</p>";
                         if(isset($_SESSION['lietotajvards'])){
-                        echo "<form action='entry.php' method='post'>
-                            <button type='submit' name='pieteikties' class='btn' value='{$ieraksts['nosaukums']}'>Rediget</button>
-                        </form>";
-                        }
+                        echo "<form action='pievienot.php' method='post'>
+                        <button type='submit' name='redigetAktualitates' value='{$ieraksts['aktualitates_id']}' class='btn'>
+                        <i class='fas fa-edit'></i>
+                        </button> </form> 
+                        
+                        <form method = 'post'>
+                        <button type='submit' name='dzestAktualitates' value='{$ieraksts['aktualitates_id']}' class='btn'>
+                        <i class='fas fa-trash'></i>
+                        </button>
+                        </form>
+                        </div>";
+                        }else{ echo "</div>"; }
+                    
                     }
                 }
                 else{
                 echo "Nav nevienas specialitātes";
             }
-        ?>
+            ?>
         </div>
     </section>
     <section id="vakances">
         <h2>IT vakances</h2>
         <div class="box-container">
+        <?php
+            if(isset($_SESSION['lietotajvards'])){
+                    echo " <form action = 'pievienot.php' method = 'post'>
+                                             <button type='submit' name='pievienotVakances' value='pievienotVakances' class='btn'>
+                                             <i class='fas fa-circle-plus'></i>
+                                             </button>
+                                             </form>";
+              }
+
+              if(isset($_POST['dzestVakances'])){
+                $dzestAktualitatiSQL = "DELETE from vakances WHERE vakances_id = ".$_POST['dzestVakances'];
+                
+                 if(mysqli_query($savienojums, $dzestAktualitatiSQL)){
+                 echo "<div class='pieteiksanaskluda zals'>Vakance veiksmīgi izdzēsta!</div>";
+                 header("Refresh:2; url=index.php");
+                 }else{
+                 echo "<div class='pieteiksanaskluda sarkans'>Kļūda sistēmā!</div>";
+                 header("Refresh:2; url=index.php");
+                }
+             }
+
+            $vakancesVaicajums = "SELECT * from vakances";
+            $atlasaVakances = mysqli_query($savienojums, $vakancesVaicajums);
+            
+            if(mysqli_num_rows($atlasaVakances) > 0){ //atlasa rindas skaitu
+                while($ieraksts = mysqli_fetch_assoc($atlasaVakances)){
+                    echo "
+                    <div class='box'>
+                        <img src='{$ieraksts['bilde']}'>
+                        <h3>{$ieraksts['nosaukums']}</h3>
+                        <p>{$ieraksts['apraksts']}</p>
+                        <p><span>Atrašanās vieta:</span> {$ieraksts['atrasanasVieta']}</p>
+                        <p><span>Vakanču skaits:</span> {$ieraksts['vakancuSkaits']}</p>
+                        <p><span>Darba laiks/veids:</span> {$ieraksts['darbaLaiksVeids']}</p>
+                        <p><span>Alga</span>{$ieraksts['alga']}</p>";
+                                  
+                        if(isset($_SESSION['lietotajvards'])){
+                        echo "<form action='pievienot.php' method='post'>
+                        <button type='submit' name='redigetVakances' value='{$ieraksts['vakances_id']}' class='btn'>
+                        <i class='fas fa-edit'></i>
+                        </button> </form> 
+                        
+                        <form method = 'post'>
+                        <button type='submit' name='dzestVakances value='{$ieraksts['vakances_id']}' class='btn'>
+                        <i class='fas fa-trash'></i>
+                        </button>
+                        </form>
+                        </div>";
+                        }else{ echo "</div>"; }
+                    
+                    }
+                }else{
+                echo "Nav nevienas specialitātes";
+            }
+        ?>
             <div class="box">
                 <img src="images/programmer.jpg" alt="1.vakance">
                 <h3>Programmētājs</h3>
@@ -95,7 +179,7 @@ session_start();
                 <p><span>Vakanču skaits:</span> 5</p>
                 <p><span>Darba laiks/veids:</span> 8:00-15:00 / atālināti</p>
                 <p><span>Alga:</span> 1500 euro mēnesī bruto</p>
-                <a href="pieteiksanas.html" class="btn"><i class="fa fa-info-circle"></i> Pieteikties</a>
+                <a href="pieteiksanas.php" class="btn"><i class="fa fa-info-circle"></i> Pieteikties</a>
             </div> 
     
             <div class="box">
@@ -108,7 +192,7 @@ session_start();
                 <p><span>Vakanču skaits:</span> 5</p>
                 <p><span>Darba laiks/veids:</span> 8:00-15:00 / atālināti</p>
                 <p><span>Alga:</span> 2500 euro mēnesī bruto</p>
-                <a href="pieteiksanas.html" class="btn"><i class="fa fa-info-circle"></i>Pieteikties</a>
+                <a href="pieteiksanas.php" class="btn"><i class="fa fa-info-circle"></i>Pieteikties</a>
             </div> 
     
             <div class="box">
@@ -121,7 +205,7 @@ session_start();
                 <p><span>Vakanču skaits:</span> 5</p>
                 <p><span>Darba laiks/veids:</span> 8:00-15:00 / atālināti</p>
                 <p><span>Alga:</span> 5500 euro mēnesī bruto</p>
-                <a href="pieteiksanas.html" class="btn btn1"><i class="fa fa-info-circle"></i>Pieteikties</a>
+                <a href="pieteiksanas.php" class="btn btn1"><i class="fa fa-info-circle"></i>Pieteikties</a>
             </div> 
         </div>
     </section>
@@ -160,6 +244,65 @@ session_start();
             </div> 
         </div>
     </section>
+    <?php
+     if(isset($_SESSION['lietotajvards'])){
+        
+        if(isset($_POST['dzestLietotaju'])){
+            $dzestLietotajuSQL = "DELETE from lietotajs WHERE lietotajs_id = ".$_POST['dzestLietotaju'];
+            
+             if(mysqli_query($savienojums, $dzestLietotajuSQL)){
+             echo "<div class='pieteiksanaskluda zals'>Specialitāte veiksmīgi izdzēsta!</div>";
+             header("Refresh:2;");
+             }else{
+             echo "<div class='pieteiksanaskluda sarkans'>Kļūda sistēmā!</div>";
+             header("Refresh:2;");
+            }
+         }
+    ?>
+       <section id='lietotaji'>
+            <h3>Administratori un moderatori</h3>
+            <div class='row'>
+            <div class='info'>
+            <div class='head-info head-color home'>Lietotāju administrēšana: <a href='jaunsLietotajs.php' class="btn3"><i class="fas fa-circle-plus"></i></a>
+            <table class='adminTabula'>
+            <tr>
+                <th>Lietotājs</th>
+                <th>Statuss</th>
+            </tr>
+        <?php
+        $lietotajaVaicajums = "SELECT *from lietotajs";
+        $atlasaLietotajus = mysqli_query($savienojums, $lietotajaVaicajums);
+
+        while($ieraksts = mysqli_fetch_assoc($atlasaLietotajus)){
+            echo "
+            <tr>
+                <td>{$ieraksts['lietotajvards']}</td> ";
+                if($ieraksts['adminStatus'] == 1){
+                    $statuss = "Administrators";
+                    echo "<td class='tabulasApraksts'>{$statuss}</td>";
+                }else{
+                    $statuss = "Moderators";
+                echo "<td class='tabulasApraksts'>{$statuss}</td>";
+                }
+                echo "
+                <td>
+                <form method = 'post'>
+                    <button type='submit' name='dzestLietotaju' value='{$ieraksts['lietotajs_id']}' class='btn4'>
+                    <i class='fas fa-trash'></i>
+                    </button>
+                </form>
+            </td>
+            </tr>
+            ";
+            }
+    ?>
+          </table>
+            </div>
+            </div>
+        </section>
+    <?php
+    }
+    ?>
 
     <footer id="parmums kontakti">
         <div class="box-container">
