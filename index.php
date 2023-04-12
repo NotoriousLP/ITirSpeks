@@ -26,7 +26,7 @@ require("files/connect_db.php");
                 if(isset($_SESSION['lietotajvards'])){
                 echo "<li><a href='#lietotaji'>Pieteikumi</a></li>";
                 if($_SESSION["adminStatus"] == 1 )
-                echo "<li><a href='#admin'>Lietotāji</a></li>";
+                echo "<li><a href='#lietotaji'>Lietotāji</a></li>";
                 
             }
                 ?>
@@ -68,13 +68,12 @@ require("files/connect_db.php");
             }
 
             if(isset($_POST['dzestVakances'])){
-                $dzestVakanciSQL = "DELETE from vakances WHERE vakances_id = ".$_POST['dzestVakances'];
 
                 $checkVakancespieteiksanasSQL = "SELECT COUNT(*) FROM vakancespieteiksanas WHERE id_vakances = ".$_POST['dzestVakances'];
                 $result = mysqli_query($savienojums, $checkVakancespieteiksanasSQL);
                 $row = mysqli_fetch_array($result);
                 if($row[0] > 0){
-                    $dzestVakancespieteiksanasSQL = "DELETE FROM vakancespieteiksanas WHERE vakances_id = ".$_POST['dzestVakances'];
+                    $dzestVakancespieteiksanasSQL = "DELETE FROM vakancespieteiksanas WHERE id_vakances = ".$_POST['dzestVakances'];
                     mysqli_query($savienojums, $dzestVakancespieteiksanasSQL);
                 }
             
@@ -85,6 +84,8 @@ require("files/connect_db.php");
                  echo "<div class='pieteiksanaskluda sarkans'>Kļūda sistēmā!</div>";
                  header("Refresh:2; url=index.php");
                 }
+
+                $dzestVakanciSQL = "DELETE from vakances WHERE vakances_id = ".$_POST['dzestVakances'];
              }
 
             if(isset($_POST['dzestPakalp'])){
@@ -123,6 +124,7 @@ require("files/connect_db.php");
                         <p>{$ieraksts['apraksts']}</p>";
                         if(isset($_SESSION['lietotajvards'])){
                         echo "<form action='pievienot.php' method='post'>
+                        <div class= 'pogas'>
                         <button type='submit' name='redigetAktualitates' value='{$ieraksts['aktualitates_id']}' class='btn5'>
                         <i class='fas fa-edit'></i>
                         </button> </form> 
@@ -132,6 +134,7 @@ require("files/connect_db.php");
                         <i class='fas fa-trash'></i>
                         </button>
                         </form>
+                        </div>
                         </div>";
                         }else{ echo "</div>"; }
                     
@@ -174,7 +177,9 @@ require("files/connect_db.php");
                         Pieteikties
                         </button> </form>";
                         if(isset($_SESSION['lietotajvards'])){
-                        echo "<form action='pievienot.php' method='post'>
+                        echo                        
+                        " <div class= 'pogas'>
+                        <form action='pievienot.php' method='post'>
                         <button type='submit' name='redigetVakances' value='{$ieraksts['vakances_id']}' class='btn5'>
                         <i class='fas fa-edit'></i>
                         </button> </form> 
@@ -184,6 +189,7 @@ require("files/connect_db.php");
                         <i class='fas fa-trash'></i>
                         </button>
                         </form>
+                        </div>
                         </div>";
                         }else{ echo "</div>"; }
                     
@@ -219,7 +225,9 @@ require("files/connect_db.php");
                         <p><span>Atrašanās vieta:</span> {$ieraksts['atrasanasVieta']}</p>
                         <p><span>Tālrunis:</span> {$ieraksts['talrunis']}</p>";
                         if(isset($_SESSION['lietotajvards'])){
-                        echo "<form action='pievienot.php' method='post'>
+                        echo "
+                        <div class= 'pogas'>
+                        <form action='pievienot.php' method='post'>
                         <button type='submit' name='redigetPakalp' value='{$ieraksts['pakalpojumi_id']}' class='btn5'>
                         <i class='fas fa-edit'></i>
                         </button> </form> 
@@ -229,6 +237,7 @@ require("files/connect_db.php");
                         <i class='fas fa-trash'></i>
                         </button>
                         </form>
+                        </div>
                         </div>";
                         }else{ echo "</div>"; }
                     

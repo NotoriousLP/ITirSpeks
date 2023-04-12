@@ -615,8 +615,8 @@ select {
 }
 
 
-#statuss.salaust {
-    word-break: break-all;
+.salaust {
+    word-wrap: break-word;
 }
 
 select {
@@ -625,7 +625,11 @@ select {
 }
 
 
-
+.pogas{
+    display: flex;
+    align-items: center;
+    margin: .7rem;
+}
 
 
 @media(max-width: 1050px){

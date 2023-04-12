@@ -70,7 +70,7 @@
                         <form method="POST">
                             <input type="text" placeholder="Vārds *" name="vards" class="box1" title="Vārds" required>
                             <input type="text" placeholder="Uzvārds *" name="uzvards" class="box1" title="Uzvārds" required>
-                            <input type="number" placeholder="Tālrunis *" name="talrunis" class="box1" title="Tālrunis" required>
+                            <input type="text" placeholder="Tālrunis *" name="talrunis" class="box1" title="Tālrunis" required>
                             <input type="text" placeholder="Komentārs" name="komentars" class="box2" title="Komentārs" >
                             <input type="text" placeholder="Darba pieredze" name="darbaPieredze" class="box2" title="Darba pieredze">
                             <input type="text" placeholder="Digitāla prasme" name="digitalaPrasme" class="box2" title="Digitāla prasme" >

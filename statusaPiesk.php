@@ -10,7 +10,7 @@
     <div class="info">
         <div class="head-info head-color">Vakanču administrēšana:</div>
         <?php
-        if(isset($_POST['apskatit'])){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
             require "files/connect_db.php";
             $Statusi  = "";
             if(isset($_POST['rediget'])){
@@ -24,8 +24,7 @@
                     echo "<div class='pieteiksanaskluda sarkans'>Kļūda sistēmā!</div>";
                     header("Refresh:2; url=index.php");
                 }
-            }
-            
+            }else{
             $pieteikumaID = $_POST['apskatit'];
 
             $statusi_SQL = "SELECT * from statuss";
@@ -34,10 +33,24 @@
             while($ieraksts = mysqli_fetch_assoc($atlasa_statusus)){
                 $Statusi = $Statusi."<option value='{$ieraksts['statuss_id']}'>{$ieraksts['stat_nosaukums']}</option>";
             }
+        
+            }}else{
+            echo "<div class = 'pieteiksanaskluda sarkans'>Kaut kas nogāja greizi! <br>
+            Atgreizies iepriekšējā lapā un mēģini vēlreiz!</div>";
+            header("Refresh:2; url=index.php");
             }
+
+            if (isset($_POST['apskatit'])) {
+                $apskatit = $_POST['apskatit'];
+            } else {
+                $apskatit = ''; 
+            }
+
             $atlasit_pieteikumu_SQL = "SELECT * from vakancespieteiksanas as vp 
             INNER JOIN statuss as st ON vp.id_statuss = st.statuss_id 
-            INNER JOIN vakances as v ON vp.id_vakances = v.vakances_id";
+            INNER JOIN vakances as v ON vp.id_vakances = v.vakances_id 
+            WHERE vp.vakancesPieteiksanas_id = $apskatit";
+
             $atlasa_pieteikumu = mysqli_query($savienojums, $atlasit_pieteikumu_SQL);
 
             while($ieraksts =  mysqli_fetch_assoc($atlasa_pieteikumu)){
