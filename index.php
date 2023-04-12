@@ -67,6 +67,37 @@ require("files/connect_db.php");
                                     </form>";
             }
 
+            if(isset($_POST['dzestVakances'])){
+                $dzestVakanciSQL = "DELETE from vakances WHERE vakances_id = ".$_POST['dzestVakances'];
+
+                $checkVakancespieteiksanasSQL = "SELECT COUNT(*) FROM vakancespieteiksanas WHERE id_vakances = ".$_POST['dzestVakances'];
+                $result = mysqli_query($savienojums, $checkVakancespieteiksanasSQL);
+                $row = mysqli_fetch_array($result);
+                if($row[0] > 0){
+                    $dzestVakancespieteiksanasSQL = "DELETE FROM vakancespieteiksanas WHERE vakances_id = ".$_POST['dzestVakances'];
+                    mysqli_query($savienojums, $dzestVakancespieteiksanasSQL);
+                }
+            
+                 if(mysqli_query($savienojums, $dzestVakanciSQL)){
+                 echo "<div class='pieteiksanaskluda zals'>Vakance veiksmīgi izdzēsta!</div>";
+                 header("Refresh:2; url=index.php");
+                 }else{
+                 echo "<div class='pieteiksanaskluda sarkans'>Kļūda sistēmā!</div>";
+                 header("Refresh:2; url=index.php");
+                }
+             }
+
+            if(isset($_POST['dzestPakalp'])){
+                $dzestPakalpSQL = "DELETE from pakalpojumi WHERE pakalpojumi_id = ".$_POST['dzestPakalp'];
+                
+                 if(mysqli_query($savienojums, $dzestPakalpSQL)){
+                 echo "<div class='pieteiksanaskluda zals'>Pakalpojumi veiksmīgi izdzēsta!</div>";
+                 header("Refresh:2; url=index.php");
+                 }else{
+                 echo "<div class='pieteiksanaskluda sarkans'>Kļūda sistēmā!</div>";
+                 header("Refresh:2; url=index.php");
+                }
+             }
 
             if(isset($_POST['dzestAktualitates'])){
                 $dzestAktualitatiSQL = "DELETE from aktualitates WHERE aktualitates_id = ".$_POST['dzestAktualitates'];
@@ -92,12 +123,12 @@ require("files/connect_db.php");
                         <p>{$ieraksts['apraksts']}</p>";
                         if(isset($_SESSION['lietotajvards'])){
                         echo "<form action='pievienot.php' method='post'>
-                        <button type='submit' name='redigetAktualitates' value='{$ieraksts['aktualitates_id']}' class='btn'>
+                        <button type='submit' name='redigetAktualitates' value='{$ieraksts['aktualitates_id']}' class='btn5'>
                         <i class='fas fa-edit'></i>
                         </button> </form> 
                         
                         <form method = 'post'>
-                        <button type='submit' name='dzestAktualitates' value='{$ieraksts['aktualitates_id']}' class='btn'>
+                        <button type='submit' name='dzestAktualitates' value='{$ieraksts['aktualitates_id']}' class='btn5'>
                         <i class='fas fa-trash'></i>
                         </button>
                         </form>
@@ -124,18 +155,6 @@ require("files/connect_db.php");
                                              </form>";
               }
 
-              if(isset($_POST['dzestVakances'])){
-                $dzestAktualitatiSQL = "DELETE from vakances WHERE vakances_id = ".$_POST['dzestVakances'];
-                
-                 if(mysqli_query($savienojums, $dzestAktualitatiSQL)){
-                 echo "<div class='pieteiksanaskluda zals'>Vakance veiksmīgi izdzēsta!</div>";
-                 header("Refresh:2; url=index.php");
-                 }else{
-                 echo "<div class='pieteiksanaskluda sarkans'>Kļūda sistēmā!</div>";
-                 header("Refresh:2; url=index.php");
-                }
-             }
-
             $vakancesVaicajums = "SELECT * from vakances";
             $atlasaVakances = mysqli_query($savienojums, $vakancesVaicajums);
             
@@ -150,15 +169,18 @@ require("files/connect_db.php");
                         <p><span>Vakanču skaits:</span> {$ieraksts['vakancuSkaits']}</p>
                         <p><span>Darba laiks/veids:</span> {$ieraksts['darbaLaiksVeids']}</p>
                         <p><span>Alga:</span> {$ieraksts['alga']}</p>
-                        <a href='pieteiksanas.php' class='btn'><i class='fa fa-info-circle'></i> Pieteikties</a>";
+                        <form action='pieteiksanas.php' method='post'>
+                        <button type='submit' name='pieteikties' value='{$ieraksts['vakances_id']}' class='btn'>
+                        Pieteikties
+                        </button> </form>";
                         if(isset($_SESSION['lietotajvards'])){
                         echo "<form action='pievienot.php' method='post'>
-                        <button type='submit' name='redigetVakances' value='{$ieraksts['vakances_id']}' class='btn'>
+                        <button type='submit' name='redigetVakances' value='{$ieraksts['vakances_id']}' class='btn5'>
                         <i class='fas fa-edit'></i>
                         </button> </form> 
                         
                         <form method = 'post'>
-                        <button type='submit' name='dzestVakances value='{$ieraksts['vakances_id']}' class='btn'>
+                        <button type='submit' name='dzestVakances value='{$ieraksts['vakances_id']}' class='btn5'>
                         <i class='fas fa-trash'></i>
                         </button>
                         </form>
@@ -184,18 +206,6 @@ require("files/connect_db.php");
                                              </form>";
               }
 
-              if(isset($_POST['dzestPakalp'])){
-                $dzestAktualitatiSQL = "DELETE from vakances WHERE vakances_id = ".$_POST['dzestVakances'];
-                
-                 if(mysqli_query($savienojums, $dzestAktualitatiSQL)){
-                 echo "<div class='pieteiksanaskluda zals'>Pakalpojumi veiksmīgi izdzēsta!</div>";
-                 header("Refresh:2; url=index.php");
-                 }else{
-                 echo "<div class='pieteiksanaskluda sarkans'>Kļūda sistēmā!</div>";
-                 header("Refresh:2; url=index.php");
-                }
-             }
-
             $pakalpVaicajums = "SELECT * from pakalpojumi";
             $atlasaPakalp = mysqli_query($savienojums, $pakalpVaicajums);
             
@@ -210,12 +220,12 @@ require("files/connect_db.php");
                         <p><span>Tālrunis:</span> {$ieraksts['talrunis']}</p>";
                         if(isset($_SESSION['lietotajvards'])){
                         echo "<form action='pievienot.php' method='post'>
-                        <button type='submit' name='redigetPakalp' value='{$ieraksts['pakalpojumi_id']}' class='btn'>
+                        <button type='submit' name='redigetPakalp' value='{$ieraksts['pakalpojumi_id']}' class='btn5'>
                         <i class='fas fa-edit'></i>
                         </button> </form> 
                         
                         <form method = 'post'>
-                        <button type='submit' name='dzestPakalp' value='{$ieraksts['pakalpojumi_id']}' class='btn'>
+                        <button type='submit' name='dzestPakalp' value='{$ieraksts['pakalpojumi_id']}' class='btn5'>
                         <i class='fas fa-trash'></i>
                         </button>
                         </form>
@@ -243,10 +253,10 @@ require("files/connect_db.php");
          }
     ?>
        <section id='lietotaji'>
-            <h3>Administratori un moderatori</h3>
+
             <div class='row'>
             <div class='info'>
-            <div class='head-info head-color home'>Lietotāju administrēšana: <a href='jaunsLietotajs.php' class="btn3"><i class="fas fa-circle-plus"></i></a>
+            <div class='head-info head-color home'>Lietotāju administrēšana: <a href='jaunsLietotajs.php' class="btn5"><i class="fas fa-circle-plus"></i></a>
             <table class='adminTabula'>
             <tr>
                 <th>Lietotājs</th>
@@ -271,7 +281,7 @@ require("files/connect_db.php");
                 echo "
                 <td>
                 <form method = 'post'>
-                    <button type='submit' name='dzestLietotaju' value='{$ieraksts['lietotajs_id']}' class='btn4'>
+                    <button type='submit' name='dzestLietotaju' value='{$ieraksts['lietotajs_id']}' class='btn5'>
                     <i class='fas fa-trash'></i>
                     </button>
                 </form>
@@ -281,8 +291,10 @@ require("files/connect_db.php");
             }
     ?>
           </table>
+
             </div>
             </div>
+            
         </section>
     <?php
         }
@@ -290,43 +302,46 @@ require("files/connect_db.php");
     <?php
      if(isset($_SESSION['lietotajvards'])){
     ?>
-    <section class="admin">
 
+
+    <section id="lietotaji">
     <div class="row">
         <div class="info">
-            <div class="head-info head-color">Vakanču administrēšana:</div>
+            <h2>Vakanču administrēšana:</h2>
             <table class="adminTabula">
             <tr>
                 <th>Vārds</th>
                 <th>Uzvārds</th>
                 <th>Tālrunis</th>
-                <th>Komentārs</th>
-                <th>Darba pieredze</th>
-                <th>Digitālā prasme</th>
-                <th>Izglītība</th>
+                <th>Vakances nosaukums</th>
                 <th>Statuss</th>
-                 <th></th>
+                <th>Komentārs</th>
+                 <th>Visa informācija</th>
             </tr>
 
             <?php
                 $atlasit_pieteikumus_SQL = "SELECT * from vakancespieteiksanas as vp 
-                INNER JOIN statuss as st ON vp.id_statuss = statuss_id";
+                INNER JOIN statuss as st ON vp.id_statuss = st.statuss_id 
+                INNER JOIN vakances as v ON vp.id_vakances = v.vakances_id";
                 $atlasa_pieteikumus = mysqli_query($savienojums, $atlasit_pieteikumus_SQL);
 
                 while($ieraksts = mysqli_fetch_assoc($atlasa_pieteikumus)){
+                    if(empty($ieraksts['komentars'])){
+                        $Komentars = "<i class='fas fa-times'></i>";
+                    }else{
+                        $Komentars = "<i class='fas fa-check'></i>";
+                    }
                     echo "
                     <tr>
                         <td>{$ieraksts['vards']}</td>
                         <td>{$ieraksts['uzvards']}</td>
                         <td>{$ieraksts['talrunis']}</td>
-                        <td>{$ieraksts['komentars']}</td>
-                        <td>{$ieraksts['darbaPieredze']}</td>
-                        <td>{$ieraksts['digitalaPrasme']}</td>
-                        <td>{$ieraksts['izglitiba']}</td>
-                        <td>{$ieraksts['stat_nosaukums']}</td>
+                        <td class='salaust'>{$ieraksts['nosaukums']}</td>
+                        <td class='salaust'>{$ieraksts['stat_nosaukums']}</td>
+                        <td>$Komentars</td>
                         <td>
                             <form action = 'statusaPiesk.php' method = 'post'>
-                                <button type='submit' name='apskatit' value='{$ieraksts['vakancesPieteiksanas_id']}' class='btn4'>
+                                <button type='submit' name='apskatit' value='{$ieraksts['vakancesPieteiksanas_id']}' class='btn5'>
                                 <i class='fas fa-edit'></i>
                                 </button>
                             </form>
@@ -339,25 +354,27 @@ require("files/connect_db.php");
         </div>
         </div>
     </section>
+
     <?php
     }
     ?>
+
     <footer id="parmums kontakti">
         <div class="box-container">
     <div class="box">
         <h2>Par mums</h2>
         <p>2023. gada februārī, mēs palīdzējam atrast vakanci 1126 cilvēkiem, un turpinam meklēt darbu cilvēkiem.
     </div>
-    
-    
+
+
     <div class="box">
     <h2>Kontakti</h2>
     <p><i class="fa-solid fa-phone"></i>+371 22 345 622</p>
     <p><i class="fa-solid fa-envelope"></i>vakances@latvia.lv</p>
     <p><i class="fa-solid fa-location-dot"></i>Latvija</p>
-
     </div>
-    
+
+
     </footer>
     <script src="script.js"></script>       
 </body>

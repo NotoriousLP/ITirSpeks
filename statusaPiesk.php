@@ -4,13 +4,13 @@
         $page = "pievienot";
     require "files/header.php";
 ?>
-<section class="admin">
+<section id="statuss">
 
 <div class="row">
     <div class="info">
         <div class="head-info head-color">Vakanču administrēšana:</div>
         <?php
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if(isset($_POST['apskatit'])){
             require "files/connect_db.php";
             $Statusi  = "";
             if(isset($_POST['rediget'])){
@@ -24,7 +24,8 @@
                     echo "<div class='pieteiksanaskluda sarkans'>Kļūda sistēmā!</div>";
                     header("Refresh:2; url=index.php");
                 }
-            }else{
+            }
+            
             $pieteikumaID = $_POST['apskatit'];
 
             $statusi_SQL = "SELECT * from statuss";
@@ -33,15 +34,10 @@
             while($ieraksts = mysqli_fetch_assoc($atlasa_statusus)){
                 $Statusi = $Statusi."<option value='{$ieraksts['statuss_id']}'>{$ieraksts['stat_nosaukums']}</option>";
             }
-        
-            }}else{
-            echo "<div class = 'pieteiksanaskluda sarkans'>Kaut kas nogāja greizi! <br>
-            Atgreizies iepriekšējā lapā un mēģini vēlreiz!</div>";
-            header("Refresh:2; url=index.php");
             }
-
             $atlasit_pieteikumu_SQL = "SELECT * from vakancespieteiksanas as vp 
-            INNER JOIN statuss as st ON vp.id_statuss = statuss_id";
+            INNER JOIN statuss as st ON vp.id_statuss = st.statuss_id 
+            INNER JOIN vakances as v ON vp.id_vakances = v.vakances_id";
             $atlasa_pieteikumu = mysqli_query($savienojums, $atlasit_pieteikumu_SQL);
 
             while($ieraksts =  mysqli_fetch_assoc($atlasa_pieteikumu)){
@@ -49,10 +45,11 @@
                     <table>
                     <tr><td>Vārds un uzvārds:</td><td class='value'>{$ieraksts['vards']} {$ieraksts['uzvards']}</td></tr>
                     <tr><td>Tālrunis:</td><td class='value'>{$ieraksts['talrunis']}</td></tr>
-                    <tr><td>Darba pieredze:</td><td class='value'>{$ieraksts['darbaPieredze']}</td></tr>
-                    <tr><td>Digitālā prasme:</td><td class='value'>{$ieraksts['digitalaPrasme']}</td></tr>
-                    <tr><td>Izglītība:</td><td class='value'>{$ieraksts['izglitiba']}</td></tr>
-                    <tr><td>Komentārs:</td><td class='value'>{$ieraksts['komentars']}</td></tr>
+                    <tr><td>Darba pieredze:</td><td class='value salaust'>{$ieraksts['darbaPieredze']}</td></tr>
+                    <tr><td>Digitālā prasme:</td><td class='value salaust'>{$ieraksts['digitalaPrasme']}</td></tr>
+                    <tr><td>Izglītība:</td><td class='value salaust'>{$ieraksts['izglitiba']}</td></tr>
+                    <tr><td>Komentārs:</td><td class='value salaust'>{$ieraksts['komentars']}</td></tr>
+                    <tr><td>Vakances nosaukums:</td><td class='value'>{$ieraksts['nosaukums']}</td></tr>
                         <form method='POST'>
                             <select name='Statuss' required>
                                 <option value='{$ieraksts['id_statuss']}' selected hidden >{$ieraksts['stat_nosaukums']}</option>
@@ -68,14 +65,10 @@
     </div>
 </div>
 </section>
-            ?>
         </table>
     </div>
 </div>
 </section>
-
-
-
 
 <?php
     require "files/footer.php";

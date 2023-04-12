@@ -111,9 +111,9 @@
                 $apraksts = $_POST['apraksts'];
                 $bilde = $_POST['bilde'];
         
-            if(!empty($nosaukums) && !empty($apraksts) && !empty($attels)){
+            if(!empty($nosaukums) && !empty($apraksts) && !empty($bilde)){
                 $pievienotAktualitateSQL = "INSERT INTO aktualitates(nosaukums,apraksts,bilde) 
-                VALUES ('$nosaukums', '$apraksts', '$attels')";
+                VALUES ('$nosaukums', '$apraksts', '$bilde')";
                 if(mysqli_query($savienojums, $pievienotAktualitateSQL)){
                 echo "<div class = 'pieteiksanaskluda zals'>Aktualitāte ir veiksmīgi pievienojusies!</div>";
                 header("Refresh:2; url=index.php");

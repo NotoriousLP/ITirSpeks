@@ -278,6 +278,23 @@ span{
     background:var(--black);
 }
 
+.btn5{
+    display: inline-block;
+    padding: .5rem 1rem;
+    margin: .5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    color:#fff;
+    background:var(--maincolor);
+    border-radius: var(--radius);
+    box-shadow: var(--box-shadow);
+}
+
+.btn5:hover{
+    background:var(--black);
+}
+
 
 footer .box-container{
     display: flex;
@@ -422,25 +439,32 @@ div .box-container h4{
 
 
 #lietotaji .row .info .adminTabula tr{
-    margin: 1rem;
+    margin: 1.5rem;
 }
 
+#lietotaji{
+    padding: 3rem;
+}
 #lietotaji .row{
-    margin-top: 10rem;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     flex-wrap: wrap;
-    gap: 1.5rem;
 }
 
 #lietotaji .row .info{
-    flex:1 1 45rem;
-    border:var(--border);
-    box-shadow: var(--box-shadow);
-    border-radius: var(--radius);
+    background: #fff;
+    border: .1rem solid rgba(0,0,0,.1);
+    padding: 1rem;
+    width: 74%;
+    margin: 1.7rem;
+    border-radius: .5rem;
 }
 
 #lietotaji .row .info2{
     flex:1 1 20rem;
+    margin: 1.7rem;
     border:var(--border);
     box-shadow: var(--box-shadow);
     border-radius: var(--radius);
@@ -462,16 +486,27 @@ div .box-container h4{
 table{
     font-size: 1rem;
 	width: 100%;
+    table-layout: fixed;
 }
 
 th, td{
 	text-align: center;
-	height: 50px;
+    height: 2rem;
+    border-bottom: 1px solid #ddd;
+    padding: 0.5rem; 
+    white-space: nowrap; 
     border-bottom: 1px solid #ddd;
 }
 
-tr:hover{
-	background-color: var(--bg);
+th {
+    font-weight: bold;
+    color: var(--black);
+    text-align: center;
+}
+
+.salaust{
+    word-break: break-all;
+    width: 1rem;
 }
 
 th{
@@ -535,6 +570,62 @@ select {
 .pieteiksanaskluda.zals{
     background: #57a141;
 }
+
+#statuss {
+    padding: 20px;
+}
+
+
+#statuss .row {
+    display: flex;
+    justify-content: center;
+}
+
+
+#statuss .info {
+    width: 800px;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+
+#statuss .head-info {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+
+#statuss .table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+
+#statuss .table th, .table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+
+#statuss .value {
+    font-weight: bold;
+}
+
+
+#statuss.salaust {
+    word-break: break-all;
+}
+
+select {
+    padding: 5px;
+    margin-right: 10px;
+}
+
+
+
 
 
 @media(max-width: 1050px){

@@ -15,32 +15,74 @@
         <div class="logo"><img src="images/logo.png">IT ir spēks</div>
         <nav class="nav">
             <ul>
-                <li><a href="index.html">Sākums</a></li>
-                <li><a href="index.html">Aktualitātes</a></li>
-                <li><a href="index.html">Vakances</a></li>
-                <li><a href="index.html">Pakalpojumi</a></li>
-                <li><a href="login.html"><i class="fa-solid fa-right-to-bracket"></i></a></li>
+                <li><a href="index.php">Sākums</a></li>
+                <li><a href="index.php">Aktualitātes</a></li>
+                <li><a href="index.php">Vakances</a></li>
+                <li><a href="index.php">Pakalpojumi</a></li>
+                <?php
+                session_start();
+                 if(isset($_SESSION['lietotajvards'])){
+                    $lietvards = $_SESSION['lietotajvards']; 
+                    echo "<li><a href='files/logout.php'><i class='fa-solid fa-sign-out'><b>$lietvards</b></i></a></li>";
+                    }else{
+                        echo "<li><a href='login.php'><i class='fa-solid fa-right-to-bracket border'></i></a></li>";
+                    }
+                ?>
             </ul>
         </nav>
     </header>
 
     <section id="pieteiksanas">
-        <h2>Pieteikšanās</h2>
+    <?php
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            require("files/connect_db.php");
+            if(isset($_POST['gatavs'])){
+                $vards = $_POST['vards'];
+                $uzvards = $_POST['uzvards'];
+                $talrunis = $_POST['talrunis'];
+                $komentars = $_POST['komentars'];
+                $darbaPieredze = $_POST['darbaPieredze'];
+                $digitalaPrasme = $_POST['digitalaPrasme'];
+                $izglitiba = $_POST['izglitiba'];
+                $vakance = $_POST['vakance'];
+
+                if(!empty($vards) && !empty($uzvards) && !empty($talrunis) && !empty($komentars) && !empty($darbaPieredze) && !empty($digitalaPrasme) && !empty($izglitiba)){
+                    $pievienot_pieteikumu_SQL = "INSERT INTO  vakancesPieteiksanas(vards,uzvards,talrunis,komentars,darbaPieredze, digitalaPrasme, izglitiba, id_vakances) 
+                    VALUES ('$vards', '$uzvards', '$talrunis', '$komentars', '$darbaPieredze', '$digitalaPrasme', '$izglitiba', '$vakance')";
+
+                    if(mysqli_query($savienojums, $pievienot_pieteikumu_SQL)){
+                        echo "<div class = 'pieteiksanaskluda zals'>Pieteikšanās ir veiksmīga!</div>";
+                        header("Refresh:2; url=index.php");
+                    }else{
+                        echo "<div class = 'pieteiksanaskluda sarkans'>Pieteikšanās nav izdevusies! Mēģiniet vēlreiz!</div>";
+                    }
+                }else{
+                    echo "<div class = 'pieteiksanaskluda sarkans'>Pieteikšanās nav izdevusies! Kāds no ievades laukiem aizpildīts NEKOREKTI!</div>";
+               }
+            }
+        }
+    ?>
+    <?php 
+    if(isset($_POST['pieteikties'])){
+    ?>
+        <h2>Pieteikšanās vakancei</h2>
                     <div class="row">
                         <form method="POST">
                             <input type="text" placeholder="Vārds *" name="vards" class="box1" title="Vārds" required>
                             <input type="text" placeholder="Uzvārds *" name="uzvards" class="box1" title="Uzvārds" required>
                             <input type="number" placeholder="Tālrunis *" name="talrunis" class="box1" title="Tālrunis" required>
-                            <input type="email" placeholder="E-pasts *" name="epasts" class="box1" title="E-pasts" required>
-                            <input type="text" placeholder="Komentārs" name="adrese" class="box2" title="Komentārs" >
+                            <input type="text" placeholder="Komentārs" name="komentars" class="box2" title="Komentārs" >
                             <input type="text" placeholder="Darba pieredze" name="darbaPieredze" class="box2" title="Darba pieredze">
                             <input type="text" placeholder="Digitāla prasme" name="digitalaPrasme" class="box2" title="Digitāla prasme" >
                             <input type="text" placeholder="Izglītība" name="izglitiba" class="box2" title="Izglītība">
                             <input type="submit" value="Pieteikties!" name="gatavs" class="btn">
+                            <input type="hidden" name="vakance" value="<?php echo $_POST['pieteikties']; ?>">
                         </form>
                     </div>
     </section>
-
+<?php
+}
+?>
     <footer id="parmums kontakti">
         <div class="box-container">
     <div class="box">
