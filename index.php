@@ -69,10 +69,10 @@ require("files/connect_db.php");
 
             if(isset($_POST['dzestVakances'])){
 
-                $checkVakancespieteiksanasSQL = "SELECT COUNT(*) FROM vakancespieteiksanas WHERE id_vakances = ".$_POST['dzestVakances'];
-                $result = mysqli_query($savienojums, $checkVakancespieteiksanasSQL);
-                $row = mysqli_fetch_array($result);
-                if($row[0] > 0){
+                $parbVakancespieteiksanasSQL = "SELECT COUNT(*) FROM vakancespieteiksanas WHERE id_vakances = ".$_POST['dzestVakances'];
+                $rezultats = mysqli_query($savienojums, $parbVakancespieteiksanasSQL);
+                $rinda = mysqli_fetch_array($rezultats);
+                if($rinda[0] > 0){
                     $dzestVakancespieteiksanasSQL = "DELETE FROM vakancespieteiksanas WHERE id_vakances = ".$_POST['dzestVakances'];
                     mysqli_query($savienojums, $dzestVakancespieteiksanasSQL);
                 }
