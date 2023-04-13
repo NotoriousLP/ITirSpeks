@@ -262,10 +262,10 @@ require("files/connect_db.php");
          }
     ?>
        <section id='lietotaji'>
-
+         <h2>Lietotāju administrēšana:</h2>
             <div class='row'>
             <div class='info'>
-            <div class='head-info head-color home'>Lietotāju administrēšana: <a href='jaunsLietotajs.php' class="btn5"><i class="fas fa-circle-plus"></i></a>
+            <div class='head-info head-color home'>Lietotāji: <a href='jaunsLietotajs.php' class="btn5"><i class="fas fa-circle-plus"></i></a>
             <table class='adminTabula'>
             <tr>
                 <th>Lietotājs</th>
@@ -314,15 +314,15 @@ require("files/connect_db.php");
 
 
     <section id="lietotaji">
+    <h2>Vakanču administrēšana:</h2>
     <div class="row">
         <div class="info">
-            <h2>Vakanču administrēšana:</h2>
             <table class="adminTabula">
             <tr>
                 <th>Vārds</th>
                 <th>Uzvārds</th>
                 <th>Tālrunis</th>
-                <th>Vakances nosaukums</th>
+                <th>Vakance</th>
                 <th>Statuss</th>
                 <th>Komentārs</th>
                  <th>Visa informācija</th>
