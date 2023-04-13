@@ -44,7 +44,7 @@
                 $apskatit = $_POST['apskatit'];
             } else {
                 $apskatit = ''; 
-            }
+            } 
 
             $atlasit_pieteikumu_SQL = "SELECT * from vakancespieteiksanas as vp 
             INNER JOIN statuss as st ON vp.id_statuss = st.statuss_id 
@@ -56,19 +56,19 @@
             while($ieraksts =  mysqli_fetch_assoc($atlasa_pieteikumu)){
                 echo "
                     <table>
-                    <tr><td>Vārds un uzvārds:</td><td class='value'>{$ieraksts['vards']} {$ieraksts['uzvards']}</td></tr>
-                    <tr><td>Tālrunis:</td><td class='value'>{$ieraksts['talrunis']}</td></tr>
-                    <tr><td>Darba pieredze:</td><td class='value salaust'>{$ieraksts['darbaPieredze']}</td></tr>
-                    <tr><td>Digitālā prasme:</td><td class='value salaust'>{$ieraksts['digitalaPrasme']}</td></tr>
-                    <tr><td>Izglītība:</td><td class='value salaust'>{$ieraksts['izglitiba']}</td></tr>
-                    <tr><td>Komentārs:</td><td class='value salaust'>{$ieraksts['komentars']}</td></tr>
-                    <tr><td>Vakances nosaukums:</td><td class='value'>{$ieraksts['nosaukums']}</td></tr>
+                    <tr><td>Vārds un uzvārds:</td><td class='vertiba'>{$ieraksts['vards']} {$ieraksts['uzvards']}</td></tr>
+                    <tr><td>Tālrunis:</td><td class='vertiba'>{$ieraksts['talrunis']}</td></tr>
+                    <tr><td>Darba pieredze:</td><td class='vertiba salaust1'>{$ieraksts['darbaPieredze']}</td></tr>
+                    <tr><td>Digitālā prasme:</td><td class='vertiba salaust1'>{$ieraksts['digitalaPrasme']}</td></tr>
+                    <tr><td>Izglītība:</td><td class='vertiba salaust1'>{$ieraksts['izglitiba']}</td></tr>
+                    <tr><td>Komentārs:</td><td class='vertiba salaust1'>{$ieraksts['komentars']}</td></tr>
+                    <tr><td>Vakances nosaukums:</td><td class='vertiba'>{$ieraksts['nosaukums']}</td></tr>
                         <form method='POST'>
                             <select name='Statuss' required>
-                                <option value='{$ieraksts['id_statuss']}' selected hidden >{$ieraksts['stat_nosaukums']}</option>
+                                <option vertiba='{$ieraksts['id_statuss']}' selected hidden >{$ieraksts['stat_nosaukums']}</option>
                                 $Statusi;
                             </select>
-                            <button class='btn' type='submit' name='rediget' value='{$ieraksts['vakancesPieteiksanas_id']}'>Saglabāt</button>
+                            <button class='btn5' type='submit' name='rediget' value='{$ieraksts['vakancesPieteiksanas_id']}'><i class='fas fa-save'></i></button>
                         </form>
                     </td></tr>
                     </table>

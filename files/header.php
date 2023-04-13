@@ -19,7 +19,12 @@
                 <li><a href="index.php">Aktualitātes</a></li>
                 <li><a href="index.php">Vakances</a></li>
                 <li><a href="index.php">Pakalpojumi</a></li>
-                <li><a href='#lietotaji'>Lietotāji</a></li>
+                <?php
+                echo "<li><a href='#vakAdm'>Pieteikumi</a></li>";
+                if($_SESSION["adminStatus"] == 1 ){
+                echo "<li><a href='#lietotaji'>Lietotāji</a></li>";
+                }
+                ?>
                 <?php
                     $lietvards = $_SESSION['lietotajvards']; 
                     echo "<li><a href='files/logout.php'><i class='fa-solid fa-sign-out'><b>$lietvards</b></i></a></li>";

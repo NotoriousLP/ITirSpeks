@@ -24,7 +24,7 @@ require("files/connect_db.php");
                 <li><a href="#pakalpojumi">Pakalpojumi</a></li>
                 <?php
                 if(isset($_SESSION['lietotajvards'])){
-                echo "<li><a href='#lietotaji'>Pieteikumi</a></li>";
+                echo "<li><a href='#vakAdm'>Pieteikumi</a></li>";
                 if($_SESSION["adminStatus"] == 1 )
                 echo "<li><a href='#lietotaji'>Lietotāji</a></li>";
                 
@@ -67,16 +67,31 @@ require("files/connect_db.php");
                                     </form>";
             }
 
+            if(isset($_POST['dzestLietotaju'])){
+                $dzestLietotajuSQL = "DELETE from lietotajs WHERE lietotajs_id = ".$_POST['dzestLietotaju'];
+                
+                 if(mysqli_query($savienojums, $dzestLietotajuSQL)){
+                 echo "<div class='pieteiksanaskluda zals'>Lietotājs veiksmīgi izdzēsts!</div>";
+                 header("Refresh:2; url=index.php"); 
+                 }else{
+                 header("Refresh:2; url=index.php");  
+                 echo "<div class='pieteiksanaskluda sarkans'>Kļūda sistēmā!</div>";
+                }
+             }
+
             if(isset($_POST['dzestVakances'])){
 
                 $parbVakancespieteiksanasSQL = "SELECT COUNT(*) FROM vakancespieteiksanas WHERE id_vakances = ".$_POST['dzestVakances'];
                 $rezultats = mysqli_query($savienojums, $parbVakancespieteiksanasSQL);
+
                 $rinda = mysqli_fetch_array($rezultats);
+                
                 if($rinda[0] > 0){
                     $dzestVakancespieteiksanasSQL = "DELETE FROM vakancespieteiksanas WHERE id_vakances = ".$_POST['dzestVakances'];
                     mysqli_query($savienojums, $dzestVakancespieteiksanasSQL);
                 }
-            
+
+                $dzestVakanciSQL = "DELETE from vakances WHERE vakances_id = ".$_POST['dzestVakances'];
                  if(mysqli_query($savienojums, $dzestVakanciSQL)){
                  echo "<div class='pieteiksanaskluda zals'>Vakance veiksmīgi izdzēsta!</div>";
                  header("Refresh:2; url=index.php");
@@ -85,7 +100,6 @@ require("files/connect_db.php");
                  header("Refresh:2; url=index.php");
                 }
 
-                $dzestVakanciSQL = "DELETE from vakances WHERE vakances_id = ".$_POST['dzestVakances'];
              }
 
             if(isset($_POST['dzestPakalp'])){
@@ -248,18 +262,12 @@ require("files/connect_db.php");
         ?>
         </div>
     </section>
+
+
+    <hr>
+
     <?php
      if(isset($_SESSION['lietotajvards']) && $_SESSION["adminStatus"] == 1 ){
-        if(isset($_POST['dzestLietotaju'])){
-            $dzestLietotajuSQL = "DELETE from lietotajs WHERE lietotajs_id = ".$_POST['dzestLietotaju'];
-            
-             if(mysqli_query($savienojums, $dzestLietotajuSQL)){
-             echo "<div class='pieteiksanaskluda zals'>Lietotājs veiksmīgi izdzēsts!</div>";
-             }else{
-             header("Refresh:2; url=index.php");  
-             echo "<div class='pieteiksanaskluda sarkans'>Kļūda sistēmā!</div>";
-            }
-         }
     ?>
        <section id='lietotaji'>
          <h2>Lietotāju administrēšana:</h2>
@@ -313,7 +321,7 @@ require("files/connect_db.php");
     ?>
 
 
-    <section id="lietotaji">
+    <section id="vakAdm">
     <h2>Vakanču administrēšana:</h2>
     <div class="row">
         <div class="info">

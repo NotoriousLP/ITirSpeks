@@ -445,6 +445,7 @@ div .box-container h4{
 #lietotaji{
     padding: 3rem;
 }
+
 #lietotaji .row{
     display: flex;
     align-items: center;
@@ -456,24 +457,51 @@ div .box-container h4{
 #lietotaji .row .info{
     background: #fff;
     border: .1rem solid rgba(0,0,0,.1);
-    padding: 4rem;
+    padding: .7rem;
     width: 74%;
     margin: 2rem;
     border-radius: .5rem;
 }
 
-#lietotaji .row .info2{
-    flex:1 1 20rem;
-    margin: 1.7rem;
-    border:var(--border);
-    box-shadow: var(--box-shadow);
-    border-radius: var(--radius);
+
+
+#vakAdm h2{
+    text-align: center;
+    padding: 1.5rem 0;
 }
+
+
+#vakAdm .row .info .adminTabula tr{
+    margin: 1.5rem;
+}
+
+#vakAdm{
+    padding: 3rem;
+}
+#vakAdm .row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+#vakAdm .row .info{
+    background: #fff;
+    border: .1rem solid rgba(0,0,0,.1);
+    padding: 1.5rem;
+    width: 74%;
+    margin: 2rem;
+    border-radius: .5rem;
+}
+
+
 
 #lietotaji h2{
     text-align: center;
     padding: 1.5rem 0;
 }
+
 
 
 .head-info{
@@ -490,7 +518,7 @@ div .box-container h4{
 }
 
 table{
-    font-size: .9rem;
+    font-size: 1rem;
 	width: 100%;
     table-layout: fixed;
     margin: .5rem;
@@ -500,7 +528,7 @@ th, td{
 	text-align: center;
     height: 2rem;
     border-bottom: 1px solid #ddd;
-    padding: .2rem .1rem; 
+    padding: .2rem .9rem; 
     white-space: nowrap; 
     border-bottom: 1px solid #ddd;
 }
@@ -513,15 +541,13 @@ th {
 
 .salaust{
     word-break: break-all;
-    width: 1rem;
+    width: 30%;
 }
 
-th{
-	font-weight: bold;
-	color: var(--black);
-	text-align:center;
+hr{
+    padding: 10rem;
+    color: var(--maincolor);
 }
-
 
 .btn3{
     padding: .8rem 1.5rem;
@@ -578,8 +604,9 @@ select {
     background: #57a141;
 }
 
+
 #statuss {
-    padding: 20px;
+    padding: 1.6rem;
 }
 
 
@@ -590,17 +617,22 @@ select {
 
 
 #statuss .info {
-    width: 800px;
+    width: 50rem;
     background-color: #f8f8f8;
-    padding: 20px;
+    padding: 1.3rem;
     border: 1px solid #ccc;
+    flex-wrap: wrap;
 }
 
+#statuss .row .info {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
 
 #statuss .head-info {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 1.3rem;
 }
 
 
@@ -612,18 +644,18 @@ select {
 
 
 #statuss .table th, .table td {
-    padding: 10px;
+    padding: 1.2rem;
     border: 1px solid #ccc;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 
-#statuss .value {
+#statuss .vertiba {
     font-weight: bold;
 }
 
-.salaust {
-    word-wrap: break-word;
-}
 
 select {
     padding: 5px;
@@ -664,6 +696,51 @@ select {
     #pakalpojumi .box-container .box{
         width: 90%;
     }
+
+    #vakAdm .row .info{
+        width: 100%;
+    }
+
+    #lietotaji .row .info{
+        width: 100%;
+    }
+
+    #vakAdm .row .info .adminTabula{
+        width: 100%;
+    }
+
+    
+    #lietotaji .row .info .adminTabula tr{
+    margin: .1rem;
+    }
+
+    #lietotaji{
+    padding: .1 0rem;
+    font-size: 1rem;
+    }
+
+    th, td{
+        text-align: center;
+        height: 1.5rem;
+        border-bottom: 1px solid #ddd;
+        padding: 0;
+        white-space: nowrap; 
+        border-bottom: 1px solid #ddd;
+        font-size: .5rem;
+    }
+    
+    th {
+        font-weight: bold;
+        color: var(--black);
+        text-align: left;
+    }
+    
+    .btn5{
+        padding: .5rem .3rem;
+        margin: .3rem;
+        font-size: 1rem;
+    }
+    
 }
 
 
