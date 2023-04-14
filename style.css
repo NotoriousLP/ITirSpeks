@@ -566,11 +566,20 @@ hr{
 }
 
 select {
-    margin-bottom: 1.2rem;
-    margin-left: 1rem;
-    margin-top: 1.2rem;
+    margin:.7rem 0;
+    padding: 1.2rem;
     font-size: 1rem;
+    color:var(--black);
+    border-radius: var(--radius);
+    border:var(--border);
+    background:#EEE;
+    text-transform: none;
+    width: 20%;
   }
+
+label{
+    margin: 0 1rem;
+}
 
 .pazinojums p{
     animation: blinker 2s linear infinite;
@@ -654,6 +663,7 @@ select {
 
 #statuss .vertiba {
     font-weight: bold;
+    word-break: break-all;
 }
 
 

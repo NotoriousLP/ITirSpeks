@@ -26,6 +26,13 @@
                 }
             }else{
             $pieteikumaID = $_POST['apskatit'];
+            
+            $atlasit_pieteikumu_SQL = "SELECT * from vakancespieteiksanas as vp 
+            INNER JOIN statuss as st ON vp.id_statuss = st.statuss_id 
+            INNER JOIN vakances as v ON vp.id_vakances = v.vakances_id 
+            WHERE vp.vakancesPieteiksanas_id = $pieteikumaID";
+
+            $atlasa_pieteikumu = mysqli_query($savienojums, $atlasit_pieteikumu_SQL);
 
             $statusi_SQL = "SELECT * from statuss";
             $atlasa_statusus = mysqli_query($savienojums, $statusi_SQL);
@@ -34,34 +41,16 @@
                 $Statusi = $Statusi."<option value='{$ieraksts['statuss_id']}'>{$ieraksts['stat_nosaukums']}</option>";
             }
         
-            }}else{
-            echo "<div class = 'pieteiksanaskluda sarkans'>Kaut kas nogāja greizi! <br>
-            Atgreizies iepriekšējā lapā un mēģini vēlreiz!</div>";
-            header("Refresh:2; url=index.php");
-            }
-
-            if (isset($_POST['apskatit'])) {
-                $apskatit = $_POST['apskatit'];
-            } else {
-                $apskatit = ''; 
-            } 
-
-            $atlasit_pieteikumu_SQL = "SELECT * from vakancespieteiksanas as vp 
-            INNER JOIN statuss as st ON vp.id_statuss = st.statuss_id 
-            INNER JOIN vakances as v ON vp.id_vakances = v.vakances_id 
-            WHERE vp.vakancesPieteiksanas_id = $apskatit";
-
-            $atlasa_pieteikumu = mysqli_query($savienojums, $atlasit_pieteikumu_SQL);
-
+         
             while($ieraksts =  mysqli_fetch_assoc($atlasa_pieteikumu)){
                 echo "
                     <table>
                     <tr><td>Vārds un uzvārds:</td><td class='vertiba'>{$ieraksts['vards']} {$ieraksts['uzvards']}</td></tr>
                     <tr><td>Tālrunis:</td><td class='vertiba'>{$ieraksts['talrunis']}</td></tr>
-                    <tr><td>Darba pieredze:</td><td class='vertiba salaust1'>{$ieraksts['darbaPieredze']}</td></tr>
-                    <tr><td>Digitālā prasme:</td><td class='vertiba salaust1'>{$ieraksts['digitalaPrasme']}</td></tr>
-                    <tr><td>Izglītība:</td><td class='vertiba salaust1'>{$ieraksts['izglitiba']}</td></tr>
-                    <tr><td>Komentārs:</td><td class='vertiba salaust1'>{$ieraksts['komentars']}</td></tr>
+                    <tr><td>Darba pieredze:</td><td class='vertiba'>{$ieraksts['darbaPieredze']}</td></tr>
+                    <tr><td>Digitālā prasme:</td><td class='vertiba'>{$ieraksts['digitalaPrasme']}</td></tr>
+                    <tr><td>Izglītība:</td><td class='vertiba'>{$ieraksts['izglitiba']}</td></tr>
+                    <tr><td>Komentārs:</td><td class='vertiba'>{$ieraksts['komentars']}</td></tr>
                     <tr><td>Vakances nosaukums:</td><td class='vertiba'>{$ieraksts['nosaukums']}</td></tr>
                         <form method='POST'>
                             <select name='Statuss' required>
@@ -73,6 +62,12 @@
                     </td></tr>
                     </table>
                 ";
+            }
+
+        }}else{
+            echo "<div class = 'pieteiksanaskluda sarkans'>Kaut kas nogāja greizi! <br>
+            Atgreizies iepriekšējā lapā un mēģini vēlreiz!</div>";
+            header("Refresh:2; url=index.php");
             }
         ?>
     </div>

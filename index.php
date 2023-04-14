@@ -199,7 +199,7 @@ require("files/connect_db.php");
                         </button> </form> 
                         
                         <form method = 'post'>
-                        <button type='submit' name='dzestVakances value='{$ieraksts['vakances_id']}' class='btn5'>
+                        <button type='submit' name='dzestVakances' value='{$ieraksts['vakances_id']}' class='btn5'>
                         <i class='fas fa-trash'></i>
                         </button>
                         </form>

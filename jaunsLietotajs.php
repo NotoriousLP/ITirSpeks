@@ -55,9 +55,9 @@
                     <div class='row'>
                         <form method='post'>
                             <input type='text' placeholder='Lietotājvārds *' name='lietotajs' class='box1' title='Lietotajs' required>
-                            <input type='password' placeholder='Parole *' name='parole' class='box2' title='Parole' required>
-                            <input type='password' placeholder='Atkārtota parole *' name='parole1' class='box2' title='Parole' required>
-                            <label for='statuss'>Statuss</label>
+                            <input type='password' placeholder='Parole *' name='parole' class='box1' title='Parole' required>
+                            <input type='password' placeholder='Atkārtota parole *' name='parole1' class='box1' title='Atkārtota parole' required>
+                            <label for='statuss'>Statuss:</label>
                             <select name='statuss'>
                             <option value='Administrators'>Administrators</option>
                             <option value='Moderators'>Moderators</option>
