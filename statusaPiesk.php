@@ -16,7 +16,7 @@
             if(isset($_POST['rediget'])){
                 $atlasitaisStatuss = $_POST['Statuss'];
                 $atjaunot_statusu_SQL = "UPDATE vakancespieteiksanas SET id_statuss = '$atlasitaisStatuss' WHERE vakancesPieteiksanas_id = ".$_POST['rediget'];
-
+            
                 if(mysqli_query($savienojums, $atjaunot_statusu_SQL)){
                     echo "<div class='pieteiksanaskluda zals'>Statuss veiksmīgi atjaunots!</div>";
                     header("Refresh:2; url=index.php");

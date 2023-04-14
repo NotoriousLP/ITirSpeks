@@ -204,7 +204,7 @@
                             <input type='text' placeholder='Apraksts *' name='apraksts' class='box2' title='Apraksts' value='{$ieraksts['apraksts']}' required>
                             <input type='text' placeholder='bilde *' name='bilde' class='box1' title='Bilde' value='{$ieraksts['bilde']}' required>
                             <input type='text' placeholder='Atrašanās vieta *' name='atrVieta' class='box1' value='{$ieraksts['atrasanasVieta']}' title='Atrašanās vieta' required>
-                            <input type='text' placeholder='Tālrunis *' name='talrunis' class='box1' value='{$ieraksts['talrunis']}' title='Alga' required>
+                            <input type='text' placeholder='Tālrunis *' name='talrunis' maxlength='12' class='box1' value='{$ieraksts['talrunis']}' title='Alga' required>
                             <button type='submit' name='redigetPakalp1' value='{$_POST['redigetPakalp']}' class='btn'>
                                 <i class='fas fa-edit'></i>
                             </button>

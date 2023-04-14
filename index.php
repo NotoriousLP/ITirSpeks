@@ -188,7 +188,7 @@ require("files/connect_db.php");
                         <p><span>Alga:</span> {$ieraksts['alga']}</p>
                         <form action='pieteiksanas.php' method='post'>
                         <button type='submit' name='pieteikties' value='{$ieraksts['vakances_id']}' class='btn'>
-                        Pieteikties
+                        <i class='fa fa-user-plus'></i> Pieteikties
                         </button> </form>";
                         if(isset($_SESSION['lietotajvards'])){
                         echo                        
@@ -330,7 +330,6 @@ require("files/connect_db.php");
                 <th>Vārds</th>
                 <th>Uzvārds</th>
                 <th>Tālrunis</th>
-                <th>Vakance</th>
                 <th>Statuss</th>
                 <th>Komentārs</th>
                  <th>Visa informācija</th>
@@ -338,8 +337,7 @@ require("files/connect_db.php");
 
             <?php
                 $atlasit_pieteikumus_SQL = "SELECT * from vakancespieteiksanas as vp 
-                INNER JOIN statuss as st ON vp.id_statuss = st.statuss_id 
-                INNER JOIN vakances as v ON vp.id_vakances = v.vakances_id";
+                INNER JOIN statuss as st ON vp.id_statuss = st.statuss_id";
                 $atlasa_pieteikumus = mysqli_query($savienojums, $atlasit_pieteikumus_SQL);
 
                 while($ieraksts = mysqli_fetch_assoc($atlasa_pieteikumus)){
@@ -353,7 +351,7 @@ require("files/connect_db.php");
                         <td>{$ieraksts['vards']}</td>
                         <td>{$ieraksts['uzvards']}</td>
                         <td>{$ieraksts['talrunis']}</td>
-                        <td class='salaust'>{$ieraksts['nosaukums']}</td>
+
                         <td class='salaust'>{$ieraksts['stat_nosaukums']}</td>
                         <td>$Komentars</td>
                         <td>
